@@ -19,6 +19,13 @@ proposal:
 
 ## Run it
 
+**Windows:** double-click `start-dashboard.bat`. On first run it installs the
+packages, then starts the server and opens http://localhost:3000. Click
+**Dev quick login**. Needs [Node.js](https://nodejs.org) (LTS). Keep the window
+open while you use the dashboard.
+
+**Command line:**
+
 ```bash
 bun install
 bun run dev
