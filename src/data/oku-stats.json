@@ -1,0 +1,4542 @@
+{
+  "meta": {
+    "source": "Jabatan Kebajikan Masyarakat (JKM) Selangor — OKU registrations approved 2021–2025",
+    "generatedOn": "2026-11-04",
+    "records": 56131,
+    "workingAgeDefinition": "15–64 years"
+  },
+  "districts": [
+    "Hulu Langat",
+    "Klang",
+    "Shah Alam",
+    "Gombak",
+    "Subang Jaya",
+    "Petaling Jaya",
+    "Kuala Selangor",
+    "Hulu Selangor",
+    "Kuala Langat",
+    "Sepang",
+    "Sabak Bernam"
+  ],
+  "all": {
+    "total": 56131,
+    "workingAge": 24160,
+    "employedWorkingAge": 5872,
+    "gender": [
+      {
+        "name": "Male",
+        "count": 37637
+      },
+      {
+        "name": "Female",
+        "count": 18493
+      }
+    ],
+    "category": [
+      {
+        "name": "Learning",
+        "count": 24288
+      },
+      {
+        "name": "Physical",
+        "count": 20336
+      },
+      {
+        "name": "Visual",
+        "count": 3724
+      },
+      {
+        "name": "Mental",
+        "count": 3133
+      },
+      {
+        "name": "Hearing",
+        "count": 2225
+      },
+      {
+        "name": "Multiple",
+        "count": 2180
+      },
+      {
+        "name": "Speech",
+        "count": 199
+      }
+    ],
+    "subCategory": [
+      {
+        "name": "Autisme",
+        "count": 12256
+      },
+      {
+        "name": "Limb Defects",
+        "count": 7660
+      },
+      {
+        "name": "Stroke",
+        "count": 5289
+      },
+      {
+        "name": "Intelektual",
+        "count": 4214
+      },
+      {
+        "name": "Specific Ld",
+        "count": 3616
+      },
+      {
+        "name": "Adhd",
+        "count": 2554
+      },
+      {
+        "name": "Buta Di Sebelah Mata",
+        "count": 2263
+      },
+      {
+        "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+        "count": 1847
+      },
+      {
+        "name": "Bilateral Hearing Loss",
+        "count": 1763
+      },
+      {
+        "name": "Spinal Cord Injury",
+        "count": 904
+      }
+    ],
+    "ageBands": [
+      {
+        "name": "0–14",
+        "count": 23032
+      },
+      {
+        "name": "15–24",
+        "count": 4013
+      },
+      {
+        "name": "25–34",
+        "count": 3052
+      },
+      {
+        "name": "35–44",
+        "count": 4161
+      },
+      {
+        "name": "45–54",
+        "count": 5797
+      },
+      {
+        "name": "55–64",
+        "count": 7137
+      },
+      {
+        "name": "65+",
+        "count": 8939
+      }
+    ],
+    "marital": [
+      {
+        "name": "Single",
+        "count": 32372
+      },
+      {
+        "name": "Married",
+        "count": 17560
+      },
+      {
+        "name": "Widowed",
+        "count": 2737
+      },
+      {
+        "name": "Divorced",
+        "count": 1222
+      },
+      {
+        "name": "Separated",
+        "count": 386
+      },
+      {
+        "name": "Not recorded",
+        "count": 1854
+      }
+    ],
+    "ethnicity": [
+      {
+        "name": "Malay",
+        "count": 34808
+      },
+      {
+        "name": "Chinese",
+        "count": 9926
+      },
+      {
+        "name": "Indian",
+        "count": 7838
+      },
+      {
+        "name": "Other",
+        "count": 3559
+      }
+    ],
+    "employmentStatus": [
+      {
+        "name": "Not working",
+        "count": 49219
+      },
+      {
+        "name": "Private sector",
+        "count": 3879
+      },
+      {
+        "name": "Self-employed",
+        "count": 1663
+      },
+      {
+        "name": "Government",
+        "count": 858
+      },
+      {
+        "name": "Retired",
+        "count": 493
+      }
+    ],
+    "employmentStatusWorkingAge": [
+      {
+        "name": "Not working",
+        "count": 18153
+      },
+      {
+        "name": "Private sector",
+        "count": 3634
+      },
+      {
+        "name": "Self-employed",
+        "count": 1437
+      },
+      {
+        "name": "Government",
+        "count": 801
+      },
+      {
+        "name": "Retired",
+        "count": 122
+      }
+    ],
+    "occupation": [
+      {
+        "name": "Elementary occupations",
+        "count": 2448
+      },
+      {
+        "name": "Service & sales",
+        "count": 1091
+      },
+      {
+        "name": "Technicians & associate professionals",
+        "count": 428
+      },
+      {
+        "name": "Clerical support",
+        "count": 363
+      },
+      {
+        "name": "Management & professional (civil service)",
+        "count": 316
+      },
+      {
+        "name": "Support staff I (civil service)",
+        "count": 308
+      },
+      {
+        "name": "Plant & machine operators",
+        "count": 307
+      },
+      {
+        "name": "Craft & related trades",
+        "count": 273
+      },
+      {
+        "name": "Managers",
+        "count": 248
+      },
+      {
+        "name": "Professionals",
+        "count": 247
+      },
+      {
+        "name": "Support staff II (civil service)",
+        "count": 212
+      },
+      {
+        "name": "Skilled agriculture, forestry & fishery",
+        "count": 52
+      },
+      {
+        "name": "Top management (civil service)",
+        "count": 32
+      },
+      {
+        "name": "Armed forces",
+        "count": 24
+      }
+    ],
+    "registrationsByYear": [
+      {
+        "name": "2021",
+        "count": 5166
+      },
+      {
+        "name": "2022",
+        "count": 9727
+      },
+      {
+        "name": "2023",
+        "count": 11745
+      },
+      {
+        "name": "2024",
+        "count": 12895
+      },
+      {
+        "name": "2025",
+        "count": 13169
+      }
+    ],
+    "employmentByCategory": [
+      {
+        "name": "Physical",
+        "workingAge": 13251,
+        "employed": 3779,
+        "rate": 28.5
+      },
+      {
+        "name": "Learning",
+        "workingAge": 3785,
+        "employed": 252,
+        "rate": 6.7
+      },
+      {
+        "name": "Mental",
+        "workingAge": 2530,
+        "employed": 445,
+        "rate": 17.6
+      },
+      {
+        "name": "Visual",
+        "workingAge": 2432,
+        "employed": 765,
+        "rate": 31.5
+      },
+      {
+        "name": "Hearing",
+        "workingAge": 1159,
+        "employed": 462,
+        "rate": 39.9
+      },
+      {
+        "name": "Multiple",
+        "workingAge": 869,
+        "employed": 140,
+        "rate": 16.1
+      },
+      {
+        "name": "Speech",
+        "workingAge": 105,
+        "employed": 28,
+        "rate": 26.7
+      }
+    ],
+    "employmentByGender": [
+      {
+        "name": "Male",
+        "workingAge": 15742,
+        "employed": 4342,
+        "rate": 27.6
+      },
+      {
+        "name": "Female",
+        "workingAge": 8418,
+        "employed": 1530,
+        "rate": 18.2
+      }
+    ],
+    "employmentByAgeBand": [
+      {
+        "name": "15–24",
+        "workingAge": 4013,
+        "employed": 154,
+        "rate": 3.8
+      },
+      {
+        "name": "25–34",
+        "workingAge": 3052,
+        "employed": 881,
+        "rate": 28.9
+      },
+      {
+        "name": "35–44",
+        "workingAge": 4161,
+        "employed": 1584,
+        "rate": 38.1
+      },
+      {
+        "name": "45–54",
+        "workingAge": 5797,
+        "employed": 1841,
+        "rate": 31.8
+      },
+      {
+        "name": "55–64",
+        "workingAge": 7137,
+        "employed": 1412,
+        "rate": 19.8
+      }
+    ]
+  },
+  "byDistrict": {
+    "Hulu Langat": {
+      "total": 9650,
+      "workingAge": 3899,
+      "employedWorkingAge": 1044,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 6507
+        },
+        {
+          "name": "Female",
+          "count": 3143
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 4704
+        },
+        {
+          "name": "Physical",
+          "count": 2978
+        },
+        {
+          "name": "Mental",
+          "count": 593
+        },
+        {
+          "name": "Visual",
+          "count": 586
+        },
+        {
+          "name": "Hearing",
+          "count": 379
+        },
+        {
+          "name": "Multiple",
+          "count": 375
+        },
+        {
+          "name": "Speech",
+          "count": 35
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 2537
+        },
+        {
+          "name": "Limb Defects",
+          "count": 982
+        },
+        {
+          "name": "Stroke",
+          "count": 902
+        },
+        {
+          "name": "Intelektual",
+          "count": 862
+        },
+        {
+          "name": "Specific Ld",
+          "count": 587
+        },
+        {
+          "name": "Adhd",
+          "count": 380
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 365
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 363
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 306
+        },
+        {
+          "name": "Gdd",
+          "count": 176
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 4395
+        },
+        {
+          "name": "15–24",
+          "count": 736
+        },
+        {
+          "name": "25–34",
+          "count": 543
+        },
+        {
+          "name": "35–44",
+          "count": 665
+        },
+        {
+          "name": "45–54",
+          "count": 892
+        },
+        {
+          "name": "55–64",
+          "count": 1063
+        },
+        {
+          "name": "65+",
+          "count": 1356
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 6280
+        },
+        {
+          "name": "Married",
+          "count": 2662
+        },
+        {
+          "name": "Widowed",
+          "count": 375
+        },
+        {
+          "name": "Divorced",
+          "count": 232
+        },
+        {
+          "name": "Separated",
+          "count": 57
+        },
+        {
+          "name": "Not recorded",
+          "count": 44
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 6428
+        },
+        {
+          "name": "Chinese",
+          "count": 1778
+        },
+        {
+          "name": "Indian",
+          "count": 856
+        },
+        {
+          "name": "Other",
+          "count": 588
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 8402
+        },
+        {
+          "name": "Private sector",
+          "count": 632
+        },
+        {
+          "name": "Self-employed",
+          "count": 309
+        },
+        {
+          "name": "Government",
+          "count": 202
+        },
+        {
+          "name": "Retired",
+          "count": 105
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 2826
+        },
+        {
+          "name": "Private sector",
+          "count": 590
+        },
+        {
+          "name": "Self-employed",
+          "count": 271
+        },
+        {
+          "name": "Government",
+          "count": 183
+        },
+        {
+          "name": "Retired",
+          "count": 29
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 627
+        },
+        {
+          "name": "Service & sales",
+          "count": 87
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 77
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 62
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 60
+        },
+        {
+          "name": "Clerical support",
+          "count": 47
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 46
+        },
+        {
+          "name": "Professionals",
+          "count": 42
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 35
+        },
+        {
+          "name": "Managers",
+          "count": 28
+        },
+        {
+          "name": "Armed forces",
+          "count": 19
+        },
+        {
+          "name": "Top management (civil service)",
+          "count": 7
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 6
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 924
+        },
+        {
+          "name": "2022",
+          "count": 1650
+        },
+        {
+          "name": "2023",
+          "count": 1999
+        },
+        {
+          "name": "2024",
+          "count": 2477
+        },
+        {
+          "name": "2025",
+          "count": 2544
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 1897,
+          "employed": 633,
+          "rate": 33.4
+        },
+        {
+          "name": "Learning",
+          "workingAge": 689,
+          "employed": 48,
+          "rate": 7.0
+        },
+        {
+          "name": "Mental",
+          "workingAge": 500,
+          "employed": 116,
+          "rate": 23.2
+        },
+        {
+          "name": "Visual",
+          "workingAge": 379,
+          "employed": 133,
+          "rate": 35.1
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 212,
+          "employed": 30,
+          "rate": 14.2
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 197,
+          "employed": 77,
+          "rate": 39.1
+        },
+        {
+          "name": "Speech",
+          "workingAge": 25,
+          "employed": 7,
+          "rate": 28.0
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 2536,
+          "employed": 767,
+          "rate": 30.2
+        },
+        {
+          "name": "Female",
+          "workingAge": 1363,
+          "employed": 277,
+          "rate": 20.3
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 736,
+          "employed": 21,
+          "rate": 2.9
+        },
+        {
+          "name": "25–34",
+          "workingAge": 543,
+          "employed": 168,
+          "rate": 30.9
+        },
+        {
+          "name": "35–44",
+          "workingAge": 665,
+          "employed": 293,
+          "rate": 44.1
+        },
+        {
+          "name": "45–54",
+          "workingAge": 892,
+          "employed": 341,
+          "rate": 38.2
+        },
+        {
+          "name": "55–64",
+          "workingAge": 1063,
+          "employed": 221,
+          "rate": 20.8
+        }
+      ]
+    },
+    "Klang": {
+      "total": 7824,
+      "workingAge": 3891,
+      "employedWorkingAge": 1065,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 5287
+        },
+        {
+          "name": "Female",
+          "count": 2536
+        }
+      ],
+      "category": [
+        {
+          "name": "Physical",
+          "count": 3395
+        },
+        {
+          "name": "Learning",
+          "count": 2595
+        },
+        {
+          "name": "Visual",
+          "count": 602
+        },
+        {
+          "name": "Multiple",
+          "count": 428
+        },
+        {
+          "name": "Mental",
+          "count": 407
+        },
+        {
+          "name": "Hearing",
+          "count": 362
+        },
+        {
+          "name": "Speech",
+          "count": 18
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Limb Defects",
+          "count": 1349
+        },
+        {
+          "name": "Autisme",
+          "count": 1299
+        },
+        {
+          "name": "Stroke",
+          "count": 857
+        },
+        {
+          "name": "Intelektual",
+          "count": 520
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 365
+        },
+        {
+          "name": "Specific Ld",
+          "count": 356
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 300
+        },
+        {
+          "name": "Adhd",
+          "count": 273
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 237
+        },
+        {
+          "name": "Spinal Cord Injury",
+          "count": 186
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 2654
+        },
+        {
+          "name": "15–24",
+          "count": 453
+        },
+        {
+          "name": "25–34",
+          "count": 433
+        },
+        {
+          "name": "35–44",
+          "count": 664
+        },
+        {
+          "name": "45–54",
+          "count": 1041
+        },
+        {
+          "name": "55–64",
+          "count": 1300
+        },
+        {
+          "name": "65+",
+          "count": 1279
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 4139
+        },
+        {
+          "name": "Married",
+          "count": 2896
+        },
+        {
+          "name": "Widowed",
+          "count": 469
+        },
+        {
+          "name": "Divorced",
+          "count": 188
+        },
+        {
+          "name": "Separated",
+          "count": 89
+        },
+        {
+          "name": "Not recorded",
+          "count": 43
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 3770
+        },
+        {
+          "name": "Chinese",
+          "count": 1497
+        },
+        {
+          "name": "Indian",
+          "count": 2040
+        },
+        {
+          "name": "Other",
+          "count": 517
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 6636
+        },
+        {
+          "name": "Private sector",
+          "count": 796
+        },
+        {
+          "name": "Self-employed",
+          "count": 257
+        },
+        {
+          "name": "Government",
+          "count": 93
+        },
+        {
+          "name": "Retired",
+          "count": 31
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 2814
+        },
+        {
+          "name": "Private sector",
+          "count": 751
+        },
+        {
+          "name": "Self-employed",
+          "count": 224
+        },
+        {
+          "name": "Government",
+          "count": 90
+        },
+        {
+          "name": "Retired",
+          "count": 6
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Service & sales",
+          "count": 298
+        },
+        {
+          "name": "Elementary occupations",
+          "count": 236
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 137
+        },
+        {
+          "name": "Clerical support",
+          "count": 126
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 119
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 44
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 41
+        },
+        {
+          "name": "Managers",
+          "count": 36
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 33
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 16
+        },
+        {
+          "name": "Professionals",
+          "count": 10
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 7
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 756
+        },
+        {
+          "name": "2022",
+          "count": 1645
+        },
+        {
+          "name": "2023",
+          "count": 1648
+        },
+        {
+          "name": "2024",
+          "count": 1798
+        },
+        {
+          "name": "2025",
+          "count": 1711
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 2380,
+          "employed": 711,
+          "rate": 29.9
+        },
+        {
+          "name": "Visual",
+          "workingAge": 415,
+          "employed": 144,
+          "rate": 34.7
+        },
+        {
+          "name": "Learning",
+          "workingAge": 398,
+          "employed": 39,
+          "rate": 9.8
+        },
+        {
+          "name": "Mental",
+          "workingAge": 341,
+          "employed": 67,
+          "rate": 19.6
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 197,
+          "employed": 81,
+          "rate": 41.1
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 139,
+          "employed": 20,
+          "rate": 14.4
+        },
+        {
+          "name": "Speech",
+          "workingAge": 11,
+          "employed": 3,
+          "rate": 27.3
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 2612,
+          "employed": 800,
+          "rate": 30.6
+        },
+        {
+          "name": "Female",
+          "workingAge": 1279,
+          "employed": 265,
+          "rate": 20.7
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 453,
+          "employed": 34,
+          "rate": 7.5
+        },
+        {
+          "name": "25–34",
+          "workingAge": 433,
+          "employed": 142,
+          "rate": 32.8
+        },
+        {
+          "name": "35–44",
+          "workingAge": 664,
+          "employed": 250,
+          "rate": 37.7
+        },
+        {
+          "name": "45–54",
+          "workingAge": 1041,
+          "employed": 354,
+          "rate": 34.0
+        },
+        {
+          "name": "55–64",
+          "workingAge": 1300,
+          "employed": 285,
+          "rate": 21.9
+        }
+      ]
+    },
+    "Shah Alam": {
+      "total": 7804,
+      "workingAge": 2718,
+      "employedWorkingAge": 426,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 5305
+        },
+        {
+          "name": "Female",
+          "count": 2499
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 4223
+        },
+        {
+          "name": "Physical",
+          "count": 2258
+        },
+        {
+          "name": "Visual",
+          "count": 436
+        },
+        {
+          "name": "Hearing",
+          "count": 295
+        },
+        {
+          "name": "Mental",
+          "count": 272
+        },
+        {
+          "name": "Multiple",
+          "count": 267
+        },
+        {
+          "name": "Speech",
+          "count": 33
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 2444
+        },
+        {
+          "name": "Limb Defects",
+          "count": 810
+        },
+        {
+          "name": "Stroke",
+          "count": 593
+        },
+        {
+          "name": "Specific Ld",
+          "count": 578
+        },
+        {
+          "name": "Adhd",
+          "count": 455
+        },
+        {
+          "name": "Intelektual",
+          "count": 438
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 242
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 230
+        },
+        {
+          "name": "Sindrom Down",
+          "count": 154
+        },
+        {
+          "name": "Gdd",
+          "count": 147
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 4115
+        },
+        {
+          "name": "15–24",
+          "count": 554
+        },
+        {
+          "name": "25–34",
+          "count": 331
+        },
+        {
+          "name": "35–44",
+          "count": 470
+        },
+        {
+          "name": "45–54",
+          "count": 645
+        },
+        {
+          "name": "55–64",
+          "count": 718
+        },
+        {
+          "name": "65+",
+          "count": 971
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 4457
+        },
+        {
+          "name": "Married",
+          "count": 2049
+        },
+        {
+          "name": "Widowed",
+          "count": 279
+        },
+        {
+          "name": "Divorced",
+          "count": 138
+        },
+        {
+          "name": "Separated",
+          "count": 30
+        },
+        {
+          "name": "Not recorded",
+          "count": 851
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 5800
+        },
+        {
+          "name": "Chinese",
+          "count": 825
+        },
+        {
+          "name": "Indian",
+          "count": 754
+        },
+        {
+          "name": "Other",
+          "count": 425
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 7291
+        },
+        {
+          "name": "Private sector",
+          "count": 297
+        },
+        {
+          "name": "Self-employed",
+          "count": 91
+        },
+        {
+          "name": "Government",
+          "count": 78
+        },
+        {
+          "name": "Retired",
+          "count": 43
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 2279
+        },
+        {
+          "name": "Private sector",
+          "count": 279
+        },
+        {
+          "name": "Self-employed",
+          "count": 74
+        },
+        {
+          "name": "Government",
+          "count": 73
+        },
+        {
+          "name": "Retired",
+          "count": 9
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 175
+        },
+        {
+          "name": "Professionals",
+          "count": 49
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 44
+        },
+        {
+          "name": "Managers",
+          "count": 36
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 35
+        },
+        {
+          "name": "Service & sales",
+          "count": 33
+        },
+        {
+          "name": "Clerical support",
+          "count": 25
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 18
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 17
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 16
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 10
+        },
+        {
+          "name": "Top management (civil service)",
+          "count": 7
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 1
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 630
+        },
+        {
+          "name": "2022",
+          "count": 1329
+        },
+        {
+          "name": "2023",
+          "count": 1805
+        },
+        {
+          "name": "2024",
+          "count": 1993
+        },
+        {
+          "name": "2025",
+          "count": 1929
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 1433,
+          "employed": 268,
+          "rate": 18.7
+        },
+        {
+          "name": "Learning",
+          "workingAge": 521,
+          "employed": 19,
+          "rate": 3.6
+        },
+        {
+          "name": "Visual",
+          "workingAge": 298,
+          "employed": 64,
+          "rate": 21.5
+        },
+        {
+          "name": "Mental",
+          "workingAge": 221,
+          "employed": 23,
+          "rate": 10.4
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 159,
+          "employed": 41,
+          "rate": 25.8
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 63,
+          "employed": 7,
+          "rate": 11.1
+        },
+        {
+          "name": "Speech",
+          "workingAge": 10,
+          "employed": 3,
+          "rate": 30.0
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 1713,
+          "employed": 301,
+          "rate": 17.6
+        },
+        {
+          "name": "Female",
+          "workingAge": 1005,
+          "employed": 125,
+          "rate": 12.4
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 554,
+          "employed": 11,
+          "rate": 2.0
+        },
+        {
+          "name": "25–34",
+          "workingAge": 331,
+          "employed": 63,
+          "rate": 19.0
+        },
+        {
+          "name": "35–44",
+          "workingAge": 470,
+          "employed": 122,
+          "rate": 26.0
+        },
+        {
+          "name": "45–54",
+          "workingAge": 645,
+          "employed": 141,
+          "rate": 21.9
+        },
+        {
+          "name": "55–64",
+          "workingAge": 718,
+          "employed": 89,
+          "rate": 12.4
+        }
+      ]
+    },
+    "Gombak": {
+      "total": 7371,
+      "workingAge": 2966,
+      "employedWorkingAge": 675,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 4993
+        },
+        {
+          "name": "Female",
+          "count": 2378
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 3587
+        },
+        {
+          "name": "Physical",
+          "count": 2297
+        },
+        {
+          "name": "Visual",
+          "count": 527
+        },
+        {
+          "name": "Mental",
+          "count": 377
+        },
+        {
+          "name": "Hearing",
+          "count": 306
+        },
+        {
+          "name": "Multiple",
+          "count": 246
+        },
+        {
+          "name": "Speech",
+          "count": 31
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 1840
+        },
+        {
+          "name": "Limb Defects",
+          "count": 914
+        },
+        {
+          "name": "Stroke",
+          "count": 568
+        },
+        {
+          "name": "Intelektual",
+          "count": 552
+        },
+        {
+          "name": "Specific Ld",
+          "count": 523
+        },
+        {
+          "name": "Adhd",
+          "count": 451
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 315
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 227
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 217
+        },
+        {
+          "name": "Gdd",
+          "count": 115
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 3371
+        },
+        {
+          "name": "15–24",
+          "count": 586
+        },
+        {
+          "name": "25–34",
+          "count": 340
+        },
+        {
+          "name": "35–44",
+          "count": 522
+        },
+        {
+          "name": "45–54",
+          "count": 663
+        },
+        {
+          "name": "55–64",
+          "count": 855
+        },
+        {
+          "name": "65+",
+          "count": 1034
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 4716
+        },
+        {
+          "name": "Married",
+          "count": 2066
+        },
+        {
+          "name": "Widowed",
+          "count": 297
+        },
+        {
+          "name": "Divorced",
+          "count": 136
+        },
+        {
+          "name": "Separated",
+          "count": 39
+        },
+        {
+          "name": "Not recorded",
+          "count": 117
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 4906
+        },
+        {
+          "name": "Chinese",
+          "count": 1062
+        },
+        {
+          "name": "Indian",
+          "count": 896
+        },
+        {
+          "name": "Other",
+          "count": 507
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 6566
+        },
+        {
+          "name": "Private sector",
+          "count": 446
+        },
+        {
+          "name": "Self-employed",
+          "count": 167
+        },
+        {
+          "name": "Government",
+          "count": 123
+        },
+        {
+          "name": "Retired",
+          "count": 68
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 2274
+        },
+        {
+          "name": "Private sector",
+          "count": 421
+        },
+        {
+          "name": "Self-employed",
+          "count": 142
+        },
+        {
+          "name": "Government",
+          "count": 112
+        },
+        {
+          "name": "Retired",
+          "count": 16
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 228
+        },
+        {
+          "name": "Service & sales",
+          "count": 141
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 67
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 57
+        },
+        {
+          "name": "Clerical support",
+          "count": 48
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 39
+        },
+        {
+          "name": "Professionals",
+          "count": 36
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 34
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 32
+        },
+        {
+          "name": "Managers",
+          "count": 28
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 15
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 4
+        },
+        {
+          "name": "Top management (civil service)",
+          "count": 3
+        },
+        {
+          "name": "Armed forces",
+          "count": 1
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 701
+        },
+        {
+          "name": "2022",
+          "count": 1271
+        },
+        {
+          "name": "2023",
+          "count": 1640
+        },
+        {
+          "name": "2024",
+          "count": 1871
+        },
+        {
+          "name": "2025",
+          "count": 1835
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 1497,
+          "employed": 404,
+          "rate": 27.0
+        },
+        {
+          "name": "Learning",
+          "workingAge": 550,
+          "employed": 30,
+          "rate": 5.5
+        },
+        {
+          "name": "Visual",
+          "workingAge": 327,
+          "employed": 105,
+          "rate": 32.1
+        },
+        {
+          "name": "Mental",
+          "workingAge": 314,
+          "employed": 54,
+          "rate": 17.2
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 151,
+          "employed": 66,
+          "rate": 43.7
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 112,
+          "employed": 13,
+          "rate": 11.6
+        },
+        {
+          "name": "Speech",
+          "workingAge": 15,
+          "employed": 3,
+          "rate": 20.0
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 1889,
+          "employed": 483,
+          "rate": 25.6
+        },
+        {
+          "name": "Female",
+          "workingAge": 1077,
+          "employed": 192,
+          "rate": 17.8
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 586,
+          "employed": 14,
+          "rate": 2.4
+        },
+        {
+          "name": "25–34",
+          "workingAge": 340,
+          "employed": 85,
+          "rate": 25.0
+        },
+        {
+          "name": "35–44",
+          "workingAge": 522,
+          "employed": 192,
+          "rate": 36.8
+        },
+        {
+          "name": "45–54",
+          "workingAge": 663,
+          "employed": 215,
+          "rate": 32.4
+        },
+        {
+          "name": "55–64",
+          "workingAge": 855,
+          "employed": 169,
+          "rate": 19.8
+        }
+      ]
+    },
+    "Subang Jaya": {
+      "total": 6704,
+      "workingAge": 3048,
+      "employedWorkingAge": 791,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 4219
+        },
+        {
+          "name": "Female",
+          "count": 2485
+        }
+      ],
+      "category": [
+        {
+          "name": "Physical",
+          "count": 3126
+        },
+        {
+          "name": "Learning",
+          "count": 2016
+        },
+        {
+          "name": "Visual",
+          "count": 505
+        },
+        {
+          "name": "Mental",
+          "count": 442
+        },
+        {
+          "name": "Hearing",
+          "count": 351
+        },
+        {
+          "name": "Multiple",
+          "count": 245
+        },
+        {
+          "name": "Speech",
+          "count": 17
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 1069
+        },
+        {
+          "name": "Limb Defects",
+          "count": 952
+        },
+        {
+          "name": "Stroke",
+          "count": 895
+        },
+        {
+          "name": "Intelektual",
+          "count": 337
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 291
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 287
+        },
+        {
+          "name": "Specific Ld",
+          "count": 267
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 215
+        },
+        {
+          "name": "Adhd",
+          "count": 185
+        },
+        {
+          "name": "Spinal Cord Injury",
+          "count": 132
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 1726
+        },
+        {
+          "name": "15–24",
+          "count": 450
+        },
+        {
+          "name": "25–34",
+          "count": 350
+        },
+        {
+          "name": "35–44",
+          "count": 501
+        },
+        {
+          "name": "45–54",
+          "count": 731
+        },
+        {
+          "name": "55–64",
+          "count": 1016
+        },
+        {
+          "name": "65+",
+          "count": 1930
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 3114
+        },
+        {
+          "name": "Married",
+          "count": 2574
+        },
+        {
+          "name": "Widowed",
+          "count": 485
+        },
+        {
+          "name": "Divorced",
+          "count": 191
+        },
+        {
+          "name": "Separated",
+          "count": 83
+        },
+        {
+          "name": "Not recorded",
+          "count": 257
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 2365
+        },
+        {
+          "name": "Chinese",
+          "count": 2781
+        },
+        {
+          "name": "Indian",
+          "count": 1072
+        },
+        {
+          "name": "Other",
+          "count": 486
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 5670
+        },
+        {
+          "name": "Private sector",
+          "count": 610
+        },
+        {
+          "name": "Self-employed",
+          "count": 254
+        },
+        {
+          "name": "Government",
+          "count": 62
+        },
+        {
+          "name": "Retired",
+          "count": 107
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 2246
+        },
+        {
+          "name": "Private sector",
+          "count": 534
+        },
+        {
+          "name": "Self-employed",
+          "count": 206
+        },
+        {
+          "name": "Government",
+          "count": 51
+        },
+        {
+          "name": "Retired",
+          "count": 10
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 420
+        },
+        {
+          "name": "Service & sales",
+          "count": 182
+        },
+        {
+          "name": "Managers",
+          "count": 62
+        },
+        {
+          "name": "Clerical support",
+          "count": 49
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 48
+        },
+        {
+          "name": "Professionals",
+          "count": 48
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 33
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 27
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 21
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 15
+        },
+        {
+          "name": "Top management (civil service)",
+          "count": 12
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 8
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 1
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 696
+        },
+        {
+          "name": "2022",
+          "count": 1198
+        },
+        {
+          "name": "2023",
+          "count": 1463
+        },
+        {
+          "name": "2024",
+          "count": 1477
+        },
+        {
+          "name": "2025",
+          "count": 1603
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 1687,
+          "employed": 512,
+          "rate": 30.3
+        },
+        {
+          "name": "Learning",
+          "workingAge": 498,
+          "employed": 41,
+          "rate": 8.2
+        },
+        {
+          "name": "Mental",
+          "workingAge": 292,
+          "employed": 47,
+          "rate": 16.1
+        },
+        {
+          "name": "Visual",
+          "workingAge": 286,
+          "employed": 85,
+          "rate": 29.7
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 166,
+          "employed": 80,
+          "rate": 48.2
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 109,
+          "employed": 25,
+          "rate": 22.9
+        },
+        {
+          "name": "Speech",
+          "workingAge": 9,
+          "employed": 1,
+          "rate": 11.1
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 1927,
+          "employed": 541,
+          "rate": 28.1
+        },
+        {
+          "name": "Female",
+          "workingAge": 1121,
+          "employed": 250,
+          "rate": 22.3
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 450,
+          "employed": 14,
+          "rate": 3.1
+        },
+        {
+          "name": "25–34",
+          "workingAge": 350,
+          "employed": 100,
+          "rate": 28.6
+        },
+        {
+          "name": "35–44",
+          "workingAge": 501,
+          "employed": 218,
+          "rate": 43.5
+        },
+        {
+          "name": "45–54",
+          "workingAge": 731,
+          "employed": 237,
+          "rate": 32.4
+        },
+        {
+          "name": "55–64",
+          "workingAge": 1016,
+          "employed": 222,
+          "rate": 21.9
+        }
+      ]
+    },
+    "Petaling Jaya": {
+      "total": 4641,
+      "workingAge": 2003,
+      "employedWorkingAge": 374,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 3073
+        },
+        {
+          "name": "Female",
+          "count": 1568
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 1889
+        },
+        {
+          "name": "Physical",
+          "count": 1693
+        },
+        {
+          "name": "Mental",
+          "count": 408
+        },
+        {
+          "name": "Visual",
+          "count": 259
+        },
+        {
+          "name": "Multiple",
+          "count": 214
+        },
+        {
+          "name": "Hearing",
+          "count": 165
+        },
+        {
+          "name": "Speech",
+          "count": 13
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 940
+        },
+        {
+          "name": "Limb Defects",
+          "count": 577
+        },
+        {
+          "name": "Stroke",
+          "count": 491
+        },
+        {
+          "name": "Adhd",
+          "count": 297
+        },
+        {
+          "name": "Intelektual",
+          "count": 259
+        },
+        {
+          "name": "Specific Ld",
+          "count": 253
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 252
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 157
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 128
+        },
+        {
+          "name": "Mood Disorder",
+          "count": 77
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 1753
+        },
+        {
+          "name": "15–24",
+          "count": 316
+        },
+        {
+          "name": "25–34",
+          "count": 251
+        },
+        {
+          "name": "35–44",
+          "count": 359
+        },
+        {
+          "name": "45–54",
+          "count": 503
+        },
+        {
+          "name": "55–64",
+          "count": 574
+        },
+        {
+          "name": "65+",
+          "count": 885
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 2377
+        },
+        {
+          "name": "Married",
+          "count": 1463
+        },
+        {
+          "name": "Widowed",
+          "count": 246
+        },
+        {
+          "name": "Divorced",
+          "count": 110
+        },
+        {
+          "name": "Separated",
+          "count": 33
+        },
+        {
+          "name": "Not recorded",
+          "count": 412
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 2765
+        },
+        {
+          "name": "Chinese",
+          "count": 896
+        },
+        {
+          "name": "Indian",
+          "count": 610
+        },
+        {
+          "name": "Other",
+          "count": 370
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 4233
+        },
+        {
+          "name": "Private sector",
+          "count": 285
+        },
+        {
+          "name": "Self-employed",
+          "count": 49
+        },
+        {
+          "name": "Government",
+          "count": 59
+        },
+        {
+          "name": "Retired",
+          "count": 15
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 1628
+        },
+        {
+          "name": "Private sector",
+          "count": 270
+        },
+        {
+          "name": "Self-employed",
+          "count": 46
+        },
+        {
+          "name": "Government",
+          "count": 58
+        },
+        {
+          "name": "Retired",
+          "count": 1
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Service & sales",
+          "count": 116
+        },
+        {
+          "name": "Elementary occupations",
+          "count": 75
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 44
+        },
+        {
+          "name": "Managers",
+          "count": 31
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 28
+        },
+        {
+          "name": "Clerical support",
+          "count": 21
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 20
+        },
+        {
+          "name": "Professionals",
+          "count": 20
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 20
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 11
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 7
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 466
+        },
+        {
+          "name": "2022",
+          "count": 727
+        },
+        {
+          "name": "2023",
+          "count": 974
+        },
+        {
+          "name": "2024",
+          "count": 1078
+        },
+        {
+          "name": "2025",
+          "count": 1304
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 1065,
+          "employed": 236,
+          "rate": 22.2
+        },
+        {
+          "name": "Learning",
+          "workingAge": 323,
+          "employed": 18,
+          "rate": 5.6
+        },
+        {
+          "name": "Mental",
+          "workingAge": 287,
+          "employed": 24,
+          "rate": 8.4
+        },
+        {
+          "name": "Visual",
+          "workingAge": 162,
+          "employed": 47,
+          "rate": 29.0
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 84,
+          "employed": 33,
+          "rate": 39.3
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 75,
+          "employed": 14,
+          "rate": 18.7
+        },
+        {
+          "name": "Speech",
+          "workingAge": 7,
+          "employed": 2,
+          "rate": 28.6
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 1327,
+          "employed": 281,
+          "rate": 21.2
+        },
+        {
+          "name": "Female",
+          "workingAge": 676,
+          "employed": 93,
+          "rate": 13.8
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 316,
+          "employed": 6,
+          "rate": 1.9
+        },
+        {
+          "name": "25–34",
+          "workingAge": 251,
+          "employed": 64,
+          "rate": 25.5
+        },
+        {
+          "name": "35–44",
+          "workingAge": 359,
+          "employed": 108,
+          "rate": 30.1
+        },
+        {
+          "name": "45–54",
+          "workingAge": 503,
+          "employed": 126,
+          "rate": 25.0
+        },
+        {
+          "name": "55–64",
+          "workingAge": 574,
+          "employed": 70,
+          "rate": 12.2
+        }
+      ]
+    },
+    "Kuala Selangor": {
+      "total": 3079,
+      "workingAge": 1437,
+      "employedWorkingAge": 356,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 2096
+        },
+        {
+          "name": "Female",
+          "count": 983
+        }
+      ],
+      "category": [
+        {
+          "name": "Physical",
+          "count": 1262
+        },
+        {
+          "name": "Learning",
+          "count": 1236
+        },
+        {
+          "name": "Visual",
+          "count": 195
+        },
+        {
+          "name": "Mental",
+          "count": 164
+        },
+        {
+          "name": "Multiple",
+          "count": 116
+        },
+        {
+          "name": "Hearing",
+          "count": 95
+        },
+        {
+          "name": "Speech",
+          "count": 9
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Limb Defects",
+          "count": 588
+        },
+        {
+          "name": "Autisme",
+          "count": 435
+        },
+        {
+          "name": "Specific Ld",
+          "count": 339
+        },
+        {
+          "name": "Intelektual",
+          "count": 261
+        },
+        {
+          "name": "Stroke",
+          "count": 230
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 130
+        },
+        {
+          "name": "Adhd",
+          "count": 126
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 111
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 70
+        },
+        {
+          "name": "Traumatic Brain Injury",
+          "count": 51
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 1219
+        },
+        {
+          "name": "15–24",
+          "count": 227
+        },
+        {
+          "name": "25–34",
+          "count": 195
+        },
+        {
+          "name": "35–44",
+          "count": 238
+        },
+        {
+          "name": "45–54",
+          "count": 344
+        },
+        {
+          "name": "55–64",
+          "count": 433
+        },
+        {
+          "name": "65+",
+          "count": 423
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 1797
+        },
+        {
+          "name": "Married",
+          "count": 1027
+        },
+        {
+          "name": "Widowed",
+          "count": 165
+        },
+        {
+          "name": "Divorced",
+          "count": 56
+        },
+        {
+          "name": "Separated",
+          "count": 11
+        },
+        {
+          "name": "Not recorded",
+          "count": 23
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 2235
+        },
+        {
+          "name": "Chinese",
+          "count": 276
+        },
+        {
+          "name": "Indian",
+          "count": 483
+        },
+        {
+          "name": "Other",
+          "count": 85
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 2644
+        },
+        {
+          "name": "Private sector",
+          "count": 189
+        },
+        {
+          "name": "Self-employed",
+          "count": 136
+        },
+        {
+          "name": "Government",
+          "count": 66
+        },
+        {
+          "name": "Retired",
+          "count": 44
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 1067
+        },
+        {
+          "name": "Private sector",
+          "count": 181
+        },
+        {
+          "name": "Self-employed",
+          "count": 112
+        },
+        {
+          "name": "Government",
+          "count": 63
+        },
+        {
+          "name": "Retired",
+          "count": 14
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 138
+        },
+        {
+          "name": "Service & sales",
+          "count": 89
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 26
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 23
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 22
+        },
+        {
+          "name": "Clerical support",
+          "count": 20
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 18
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 16
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 12
+        },
+        {
+          "name": "Professionals",
+          "count": 11
+        },
+        {
+          "name": "Managers",
+          "count": 8
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 5
+        },
+        {
+          "name": "Top management (civil service)",
+          "count": 2
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 273
+        },
+        {
+          "name": "2022",
+          "count": 607
+        },
+        {
+          "name": "2023",
+          "count": 671
+        },
+        {
+          "name": "2024",
+          "count": 652
+        },
+        {
+          "name": "2025",
+          "count": 688
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 890,
+          "employed": 256,
+          "rate": 28.8
+        },
+        {
+          "name": "Learning",
+          "workingAge": 163,
+          "employed": 6,
+          "rate": 3.7
+        },
+        {
+          "name": "Mental",
+          "workingAge": 152,
+          "employed": 23,
+          "rate": 15.1
+        },
+        {
+          "name": "Visual",
+          "workingAge": 129,
+          "employed": 37,
+          "rate": 28.7
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 52,
+          "employed": 20,
+          "rate": 38.5
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 46,
+          "employed": 13,
+          "rate": 28.3
+        },
+        {
+          "name": "Speech",
+          "workingAge": 3,
+          "employed": 1,
+          "rate": 33.3
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 952,
+          "employed": 270,
+          "rate": 28.4
+        },
+        {
+          "name": "Female",
+          "workingAge": 485,
+          "employed": 86,
+          "rate": 17.7
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 227,
+          "employed": 11,
+          "rate": 4.8
+        },
+        {
+          "name": "25–34",
+          "workingAge": 195,
+          "employed": 60,
+          "rate": 30.8
+        },
+        {
+          "name": "35–44",
+          "workingAge": 238,
+          "employed": 90,
+          "rate": 37.8
+        },
+        {
+          "name": "45–54",
+          "workingAge": 344,
+          "employed": 96,
+          "rate": 27.9
+        },
+        {
+          "name": "55–64",
+          "workingAge": 433,
+          "employed": 99,
+          "rate": 22.9
+        }
+      ]
+    },
+    "Hulu Selangor": {
+      "total": 2703,
+      "workingAge": 1362,
+      "employedWorkingAge": 379,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 1818
+        },
+        {
+          "name": "Female",
+          "count": 885
+        }
+      ],
+      "category": [
+        {
+          "name": "Physical",
+          "count": 1104
+        },
+        {
+          "name": "Learning",
+          "count": 1084
+        },
+        {
+          "name": "Visual",
+          "count": 190
+        },
+        {
+          "name": "Mental",
+          "count": 136
+        },
+        {
+          "name": "Hearing",
+          "count": 97
+        },
+        {
+          "name": "Multiple",
+          "count": 73
+        },
+        {
+          "name": "Speech",
+          "count": 19
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Limb Defects",
+          "count": 494
+        },
+        {
+          "name": "Autisme",
+          "count": 425
+        },
+        {
+          "name": "Stroke",
+          "count": 264
+        },
+        {
+          "name": "Intelektual",
+          "count": 233
+        },
+        {
+          "name": "Adhd",
+          "count": 185
+        },
+        {
+          "name": "Specific Ld",
+          "count": 173
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 129
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 77
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 76
+        },
+        {
+          "name": "Spinal Cord Injury",
+          "count": 42
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 1000
+        },
+        {
+          "name": "15–24",
+          "count": 227
+        },
+        {
+          "name": "25–34",
+          "count": 178
+        },
+        {
+          "name": "35–44",
+          "count": 227
+        },
+        {
+          "name": "45–54",
+          "count": 338
+        },
+        {
+          "name": "55–64",
+          "count": 392
+        },
+        {
+          "name": "65+",
+          "count": 341
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 1530
+        },
+        {
+          "name": "Married",
+          "count": 922
+        },
+        {
+          "name": "Widowed",
+          "count": 135
+        },
+        {
+          "name": "Divorced",
+          "count": 53
+        },
+        {
+          "name": "Separated",
+          "count": 18
+        },
+        {
+          "name": "Not recorded",
+          "count": 45
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 1897
+        },
+        {
+          "name": "Chinese",
+          "count": 250
+        },
+        {
+          "name": "Indian",
+          "count": 368
+        },
+        {
+          "name": "Other",
+          "count": 188
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 2270
+        },
+        {
+          "name": "Private sector",
+          "count": 217
+        },
+        {
+          "name": "Self-employed",
+          "count": 126
+        },
+        {
+          "name": "Government",
+          "count": 59
+        },
+        {
+          "name": "Retired",
+          "count": 31
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 967
+        },
+        {
+          "name": "Private sector",
+          "count": 211
+        },
+        {
+          "name": "Self-employed",
+          "count": 110
+        },
+        {
+          "name": "Government",
+          "count": 58
+        },
+        {
+          "name": "Retired",
+          "count": 16
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 186
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 40
+        },
+        {
+          "name": "Service & sales",
+          "count": 38
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 31
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 25
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 19
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 17
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 14
+        },
+        {
+          "name": "Professionals",
+          "count": 10
+        },
+        {
+          "name": "Clerical support",
+          "count": 8
+        },
+        {
+          "name": "Managers",
+          "count": 6
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 5
+        },
+        {
+          "name": "Armed forces",
+          "count": 3
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 278
+        },
+        {
+          "name": "2022",
+          "count": 455
+        },
+        {
+          "name": "2023",
+          "count": 622
+        },
+        {
+          "name": "2024",
+          "count": 585
+        },
+        {
+          "name": "2025",
+          "count": 614
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 808,
+          "employed": 269,
+          "rate": 33.3
+        },
+        {
+          "name": "Learning",
+          "workingAge": 206,
+          "employed": 8,
+          "rate": 3.9
+        },
+        {
+          "name": "Visual",
+          "workingAge": 135,
+          "employed": 47,
+          "rate": 34.8
+        },
+        {
+          "name": "Mental",
+          "workingAge": 122,
+          "employed": 26,
+          "rate": 21.3
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 55,
+          "employed": 20,
+          "rate": 36.4
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 26,
+          "employed": 4,
+          "rate": 15.4
+        },
+        {
+          "name": "Speech",
+          "workingAge": 10,
+          "employed": 5,
+          "rate": 50.0
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 900,
+          "employed": 293,
+          "rate": 32.6
+        },
+        {
+          "name": "Female",
+          "workingAge": 462,
+          "employed": 86,
+          "rate": 18.6
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 227,
+          "employed": 15,
+          "rate": 6.6
+        },
+        {
+          "name": "25–34",
+          "workingAge": 178,
+          "employed": 61,
+          "rate": 34.3
+        },
+        {
+          "name": "35–44",
+          "workingAge": 227,
+          "employed": 107,
+          "rate": 47.1
+        },
+        {
+          "name": "45–54",
+          "workingAge": 338,
+          "employed": 110,
+          "rate": 32.5
+        },
+        {
+          "name": "55–64",
+          "workingAge": 392,
+          "employed": 86,
+          "rate": 21.9
+        }
+      ]
+    },
+    "Kuala Langat": {
+      "total": 2640,
+      "workingAge": 1249,
+      "employedWorkingAge": 370,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 1766
+        },
+        {
+          "name": "Female",
+          "count": 874
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 1070
+        },
+        {
+          "name": "Physical",
+          "count": 1013
+        },
+        {
+          "name": "Visual",
+          "count": 198
+        },
+        {
+          "name": "Mental",
+          "count": 145
+        },
+        {
+          "name": "Multiple",
+          "count": 133
+        },
+        {
+          "name": "Hearing",
+          "count": 73
+        },
+        {
+          "name": "Speech",
+          "count": 7
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 475
+        },
+        {
+          "name": "Limb Defects",
+          "count": 441
+        },
+        {
+          "name": "Intelektual",
+          "count": 259
+        },
+        {
+          "name": "Stroke",
+          "count": 235
+        },
+        {
+          "name": "Specific Ld",
+          "count": 179
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 128
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 105
+        },
+        {
+          "name": "Adhd",
+          "count": 74
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 61
+        },
+        {
+          "name": "Spinal Cord Injury",
+          "count": 45
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 1069
+        },
+        {
+          "name": "15–24",
+          "count": 178
+        },
+        {
+          "name": "25–34",
+          "count": 176
+        },
+        {
+          "name": "35–44",
+          "count": 228
+        },
+        {
+          "name": "45–54",
+          "count": 289
+        },
+        {
+          "name": "55–64",
+          "count": 378
+        },
+        {
+          "name": "65+",
+          "count": 322
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 1552
+        },
+        {
+          "name": "Married",
+          "count": 879
+        },
+        {
+          "name": "Widowed",
+          "count": 127
+        },
+        {
+          "name": "Divorced",
+          "count": 55
+        },
+        {
+          "name": "Separated",
+          "count": 14
+        },
+        {
+          "name": "Not recorded",
+          "count": 13
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 1710
+        },
+        {
+          "name": "Chinese",
+          "count": 267
+        },
+        {
+          "name": "Indian",
+          "count": 461
+        },
+        {
+          "name": "Other",
+          "count": 202
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 2228
+        },
+        {
+          "name": "Private sector",
+          "count": 214
+        },
+        {
+          "name": "Self-employed",
+          "count": 119
+        },
+        {
+          "name": "Government",
+          "count": 54
+        },
+        {
+          "name": "Retired",
+          "count": 24
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 868
+        },
+        {
+          "name": "Private sector",
+          "count": 209
+        },
+        {
+          "name": "Self-employed",
+          "count": 108
+        },
+        {
+          "name": "Government",
+          "count": 53
+        },
+        {
+          "name": "Retired",
+          "count": 10
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 174
+        },
+        {
+          "name": "Service & sales",
+          "count": 45
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 34
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 34
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 24
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 17
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 16
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 13
+        },
+        {
+          "name": "Clerical support",
+          "count": 11
+        },
+        {
+          "name": "Professionals",
+          "count": 10
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 4
+        },
+        {
+          "name": "Managers",
+          "count": 3
+        },
+        {
+          "name": "Armed forces",
+          "count": 1
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 297
+        },
+        {
+          "name": "2022",
+          "count": 435
+        },
+        {
+          "name": "2023",
+          "count": 575
+        },
+        {
+          "name": "2024",
+          "count": 631
+        },
+        {
+          "name": "2025",
+          "count": 593
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 743,
+          "employed": 257,
+          "rate": 34.6
+        },
+        {
+          "name": "Learning",
+          "workingAge": 151,
+          "employed": 8,
+          "rate": 5.3
+        },
+        {
+          "name": "Visual",
+          "workingAge": 142,
+          "employed": 58,
+          "rate": 40.8
+        },
+        {
+          "name": "Mental",
+          "workingAge": 127,
+          "employed": 24,
+          "rate": 18.9
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 42,
+          "employed": 5,
+          "rate": 11.9
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 39,
+          "employed": 17,
+          "rate": 43.6
+        },
+        {
+          "name": "Speech",
+          "workingAge": 4,
+          "employed": 1,
+          "rate": 25.0
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 818,
+          "employed": 291,
+          "rate": 35.6
+        },
+        {
+          "name": "Female",
+          "workingAge": 431,
+          "employed": 79,
+          "rate": 18.3
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 178,
+          "employed": 16,
+          "rate": 9.0
+        },
+        {
+          "name": "25–34",
+          "workingAge": 176,
+          "employed": 59,
+          "rate": 33.5
+        },
+        {
+          "name": "35–44",
+          "workingAge": 228,
+          "employed": 87,
+          "rate": 38.2
+        },
+        {
+          "name": "45–54",
+          "workingAge": 289,
+          "employed": 112,
+          "rate": 38.8
+        },
+        {
+          "name": "55–64",
+          "workingAge": 378,
+          "employed": 96,
+          "rate": 25.4
+        }
+      ]
+    },
+    "Sepang": {
+      "total": 2106,
+      "workingAge": 821,
+      "employedWorkingAge": 210,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 1473
+        },
+        {
+          "name": "Female",
+          "count": 633
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 1096
+        },
+        {
+          "name": "Physical",
+          "count": 673
+        },
+        {
+          "name": "Visual",
+          "count": 132
+        },
+        {
+          "name": "Mental",
+          "count": 85
+        },
+        {
+          "name": "Hearing",
+          "count": 63
+        },
+        {
+          "name": "Multiple",
+          "count": 46
+        },
+        {
+          "name": "Speech",
+          "count": 8
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Autisme",
+          "count": 609
+        },
+        {
+          "name": "Limb Defects",
+          "count": 282
+        },
+        {
+          "name": "Intelektual",
+          "count": 173
+        },
+        {
+          "name": "Stroke",
+          "count": 146
+        },
+        {
+          "name": "Specific Ld",
+          "count": 146
+        },
+        {
+          "name": "Adhd",
+          "count": 86
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 83
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 55
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 51
+        },
+        {
+          "name": "Gdd",
+          "count": 45
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 1058
+        },
+        {
+          "name": "15–24",
+          "count": 145
+        },
+        {
+          "name": "25–34",
+          "count": 116
+        },
+        {
+          "name": "35–44",
+          "count": 150
+        },
+        {
+          "name": "45–54",
+          "count": 196
+        },
+        {
+          "name": "55–64",
+          "count": 214
+        },
+        {
+          "name": "65+",
+          "count": 227
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 1376
+        },
+        {
+          "name": "Married",
+          "count": 581
+        },
+        {
+          "name": "Widowed",
+          "count": 85
+        },
+        {
+          "name": "Divorced",
+          "count": 39
+        },
+        {
+          "name": "Separated",
+          "count": 5
+        },
+        {
+          "name": "Not recorded",
+          "count": 20
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 1624
+        },
+        {
+          "name": "Chinese",
+          "count": 134
+        },
+        {
+          "name": "Indian",
+          "count": 215
+        },
+        {
+          "name": "Other",
+          "count": 133
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 1875
+        },
+        {
+          "name": "Private sector",
+          "count": 138
+        },
+        {
+          "name": "Self-employed",
+          "count": 42
+        },
+        {
+          "name": "Government",
+          "count": 40
+        },
+        {
+          "name": "Retired",
+          "count": 10
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 606
+        },
+        {
+          "name": "Private sector",
+          "count": 134
+        },
+        {
+          "name": "Self-employed",
+          "count": 38
+        },
+        {
+          "name": "Government",
+          "count": 38
+        },
+        {
+          "name": "Retired",
+          "count": 5
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 115
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 24
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 21
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 16
+        },
+        {
+          "name": "Service & sales",
+          "count": 10
+        },
+        {
+          "name": "Managers",
+          "count": 8
+        },
+        {
+          "name": "Professionals",
+          "count": 7
+        },
+        {
+          "name": "Clerical support",
+          "count": 6
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 5
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 3
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 2
+        },
+        {
+          "name": "Top management (civil service)",
+          "count": 1
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 0
+        },
+        {
+          "name": "2022",
+          "count": 0
+        },
+        {
+          "name": "2023",
+          "count": 0
+        },
+        {
+          "name": "2024",
+          "count": 0
+        },
+        {
+          "name": "2025",
+          "count": 0
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 465,
+          "employed": 134,
+          "rate": 28.8
+        },
+        {
+          "name": "Learning",
+          "workingAge": 120,
+          "employed": 7,
+          "rate": 5.8
+        },
+        {
+          "name": "Visual",
+          "workingAge": 97,
+          "employed": 29,
+          "rate": 29.9
+        },
+        {
+          "name": "Mental",
+          "workingAge": 74,
+          "employed": 18,
+          "rate": 24.3
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 37,
+          "employed": 17,
+          "rate": 45.9
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 23,
+          "employed": 5,
+          "rate": 21.7
+        },
+        {
+          "name": "Speech",
+          "workingAge": 4,
+          "employed": 0,
+          "rate": 0.0
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 546,
+          "employed": 163,
+          "rate": 29.9
+        },
+        {
+          "name": "Female",
+          "workingAge": 275,
+          "employed": 47,
+          "rate": 17.1
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 145,
+          "employed": 5,
+          "rate": 3.4
+        },
+        {
+          "name": "25–34",
+          "workingAge": 116,
+          "employed": 30,
+          "rate": 25.9
+        },
+        {
+          "name": "35–44",
+          "workingAge": 150,
+          "employed": 68,
+          "rate": 45.3
+        },
+        {
+          "name": "45–54",
+          "workingAge": 196,
+          "employed": 69,
+          "rate": 35.2
+        },
+        {
+          "name": "55–64",
+          "workingAge": 214,
+          "employed": 38,
+          "rate": 17.8
+        }
+      ]
+    },
+    "Sabak Bernam": {
+      "total": 1609,
+      "workingAge": 766,
+      "employedWorkingAge": 182,
+      "gender": [
+        {
+          "name": "Male",
+          "count": 1100
+        },
+        {
+          "name": "Female",
+          "count": 509
+        }
+      ],
+      "category": [
+        {
+          "name": "Learning",
+          "count": 788
+        },
+        {
+          "name": "Physical",
+          "count": 537
+        },
+        {
+          "name": "Mental",
+          "count": 104
+        },
+        {
+          "name": "Visual",
+          "count": 94
+        },
+        {
+          "name": "Hearing",
+          "count": 39
+        },
+        {
+          "name": "Multiple",
+          "count": 37
+        },
+        {
+          "name": "Speech",
+          "count": 9
+        }
+      ],
+      "subCategory": [
+        {
+          "name": "Intelektual",
+          "count": 320
+        },
+        {
+          "name": "Limb Defects",
+          "count": 271
+        },
+        {
+          "name": "Specific Ld",
+          "count": 215
+        },
+        {
+          "name": "Autisme",
+          "count": 183
+        },
+        {
+          "name": "Stroke",
+          "count": 108
+        },
+        {
+          "name": "Schizophrenia, Schizotypal And Delusional Disorders",
+          "count": 68
+        },
+        {
+          "name": "Buta Di Sebelah Mata",
+          "count": 60
+        },
+        {
+          "name": "Adhd",
+          "count": 42
+        },
+        {
+          "name": "Traumatic Brain Injury",
+          "count": 32
+        },
+        {
+          "name": "Bilateral Hearing Loss",
+          "count": 27
+        }
+      ],
+      "ageBands": [
+        {
+          "name": "0–14",
+          "count": 672
+        },
+        {
+          "name": "15–24",
+          "count": 141
+        },
+        {
+          "name": "25–34",
+          "count": 139
+        },
+        {
+          "name": "35–44",
+          "count": 137
+        },
+        {
+          "name": "45–54",
+          "count": 155
+        },
+        {
+          "name": "55–64",
+          "count": 194
+        },
+        {
+          "name": "65+",
+          "count": 171
+        }
+      ],
+      "marital": [
+        {
+          "name": "Single",
+          "count": 1034
+        },
+        {
+          "name": "Married",
+          "count": 441
+        },
+        {
+          "name": "Widowed",
+          "count": 74
+        },
+        {
+          "name": "Divorced",
+          "count": 24
+        },
+        {
+          "name": "Separated",
+          "count": 7
+        },
+        {
+          "name": "Not recorded",
+          "count": 29
+        }
+      ],
+      "ethnicity": [
+        {
+          "name": "Malay",
+          "count": 1308
+        },
+        {
+          "name": "Chinese",
+          "count": 160
+        },
+        {
+          "name": "Indian",
+          "count": 83
+        },
+        {
+          "name": "Other",
+          "count": 58
+        }
+      ],
+      "employmentStatus": [
+        {
+          "name": "Not working",
+          "count": 1404
+        },
+        {
+          "name": "Private sector",
+          "count": 55
+        },
+        {
+          "name": "Self-employed",
+          "count": 113
+        },
+        {
+          "name": "Government",
+          "count": 22
+        },
+        {
+          "name": "Retired",
+          "count": 15
+        }
+      ],
+      "employmentStatusWorkingAge": [
+        {
+          "name": "Not working",
+          "count": 578
+        },
+        {
+          "name": "Private sector",
+          "count": 54
+        },
+        {
+          "name": "Self-employed",
+          "count": 106
+        },
+        {
+          "name": "Government",
+          "count": 22
+        },
+        {
+          "name": "Retired",
+          "count": 6
+        }
+      ],
+      "occupation": [
+        {
+          "name": "Elementary occupations",
+          "count": 74
+        },
+        {
+          "name": "Service & sales",
+          "count": 52
+        },
+        {
+          "name": "Skilled agriculture, forestry & fishery",
+          "count": 18
+        },
+        {
+          "name": "Craft & related trades",
+          "count": 10
+        },
+        {
+          "name": "Management & professional (civil service)",
+          "count": 8
+        },
+        {
+          "name": "Support staff II (civil service)",
+          "count": 7
+        },
+        {
+          "name": "Plant & machine operators",
+          "count": 6
+        },
+        {
+          "name": "Professionals",
+          "count": 4
+        },
+        {
+          "name": "Technicians & associate professionals",
+          "count": 3
+        },
+        {
+          "name": "Support staff I (civil service)",
+          "count": 3
+        },
+        {
+          "name": "Managers",
+          "count": 2
+        },
+        {
+          "name": "Clerical support",
+          "count": 2
+        }
+      ],
+      "registrationsByYear": [
+        {
+          "name": "2021",
+          "count": 145
+        },
+        {
+          "name": "2022",
+          "count": 410
+        },
+        {
+          "name": "2023",
+          "count": 348
+        },
+        {
+          "name": "2024",
+          "count": 333
+        },
+        {
+          "name": "2025",
+          "count": 348
+        }
+      ],
+      "employmentByCategory": [
+        {
+          "name": "Physical",
+          "workingAge": 386,
+          "employed": 99,
+          "rate": 25.6
+        },
+        {
+          "name": "Learning",
+          "workingAge": 166,
+          "employed": 28,
+          "rate": 16.9
+        },
+        {
+          "name": "Mental",
+          "workingAge": 100,
+          "employed": 23,
+          "rate": 23.0
+        },
+        {
+          "name": "Visual",
+          "workingAge": 62,
+          "employed": 16,
+          "rate": 25.8
+        },
+        {
+          "name": "Multiple",
+          "workingAge": 22,
+          "employed": 4,
+          "rate": 18.2
+        },
+        {
+          "name": "Hearing",
+          "workingAge": 22,
+          "employed": 10,
+          "rate": 45.5
+        },
+        {
+          "name": "Speech",
+          "workingAge": 7,
+          "employed": 2,
+          "rate": 28.6
+        }
+      ],
+      "employmentByGender": [
+        {
+          "name": "Male",
+          "workingAge": 522,
+          "employed": 152,
+          "rate": 29.1
+        },
+        {
+          "name": "Female",
+          "workingAge": 244,
+          "employed": 30,
+          "rate": 12.3
+        }
+      ],
+      "employmentByAgeBand": [
+        {
+          "name": "15–24",
+          "workingAge": 141,
+          "employed": 7,
+          "rate": 5.0
+        },
+        {
+          "name": "25–34",
+          "workingAge": 139,
+          "employed": 49,
+          "rate": 35.3
+        },
+        {
+          "name": "35–44",
+          "workingAge": 137,
+          "employed": 49,
+          "rate": 35.8
+        },
+        {
+          "name": "45–54",
+          "workingAge": 155,
+          "employed": 40,
+          "rate": 25.8
+        },
+        {
+          "name": "55–64",
+          "workingAge": 194,
+          "employed": 37,
+          "rate": 19.1
+        }
+      ]
+    }
+  },
+  "districtSummary": [
+    {
+      "name": "Hulu Langat",
+      "total": 9650,
+      "workingAge": 3899,
+      "employed": 1044,
+      "rate": 26.8
+    },
+    {
+      "name": "Klang",
+      "total": 7824,
+      "workingAge": 3891,
+      "employed": 1065,
+      "rate": 27.4
+    },
+    {
+      "name": "Shah Alam",
+      "total": 7804,
+      "workingAge": 2718,
+      "employed": 426,
+      "rate": 15.7
+    },
+    {
+      "name": "Gombak",
+      "total": 7371,
+      "workingAge": 2966,
+      "employed": 675,
+      "rate": 22.8
+    },
+    {
+      "name": "Subang Jaya",
+      "total": 6704,
+      "workingAge": 3048,
+      "employed": 791,
+      "rate": 26.0
+    },
+    {
+      "name": "Petaling Jaya",
+      "total": 4641,
+      "workingAge": 2003,
+      "employed": 374,
+      "rate": 18.7
+    },
+    {
+      "name": "Kuala Selangor",
+      "total": 3079,
+      "workingAge": 1437,
+      "employed": 356,
+      "rate": 24.8
+    },
+    {
+      "name": "Hulu Selangor",
+      "total": 2703,
+      "workingAge": 1362,
+      "employed": 379,
+      "rate": 27.8
+    },
+    {
+      "name": "Kuala Langat",
+      "total": 2640,
+      "workingAge": 1249,
+      "employed": 370,
+      "rate": 29.6
+    },
+    {
+      "name": "Sepang",
+      "total": 2106,
+      "workingAge": 821,
+      "employed": 210,
+      "rate": 25.6
+    },
+    {
+      "name": "Sabak Bernam",
+      "total": 1609,
+      "workingAge": 766,
+      "employed": 182,
+      "rate": 23.8
+    }
+  ]
+}
