@@ -22,6 +22,13 @@ if not exist "scraper\.venv\Scripts\python.exe" (
   scraper\.venv\Scripts\python.exe -m pip install -r scraper\requirements.txt || goto :fail
 )
 
+REM Hiredly builds its job lists with JavaScript, so the scraper needs a browser.
+if not exist "scraper\.venv\browser-installed.txt" (
+  echo Downloading the browser used for JavaScript pages - first run only, a few hundred MB...
+  scraper\.venv\Scripts\scrapling.exe install || goto :fail
+  echo installed > scraper\.venv\browser-installed.txt
+)
+
 set MAXJOBS=100
 set /p MAXJOBS="How many job pages per site? (Enter = 100): "
 

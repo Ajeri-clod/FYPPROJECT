@@ -49,14 +49,25 @@ python scrape_jobs.py --start-url "https://example.com/jobs?location=selangor" \
   --link-pattern "/job/[^/]+$" --source "Example Jobs"
 ```
 
-If `--inspect` shows no links, the site builds its pages with JavaScript. Add
-`--browser`, after running `scrapling install` once to download the browser.
+If `--inspect` shows no job links (only menus or categories), the site builds
+its listings with JavaScript. Hiredly is like this. Run `scrapling install`
+once to download the browser, then inspect again with the browser, scrolling
+to load more jobs:
+
+```bash
+python scrape_jobs.py --inspect "https://my.hiredly.com/jobs?state=Selangor" --browser --scroll 5
+```
+
+The Hiredly preset already does this: it opens only the **listing** pages in a
+hidden browser and scrolls 8 times (`--scroll` changes that). Job pages are
+plain HTML, so they still use the fast HTTP fetcher. Add `--browser` to render
+every page in the browser instead.
 
 ## How it works (for the methodology chapter)
 
 | Step | What happens | Code |
 |---|---|---|
-| Crawl | A Scrapling `Spider` walks listing pages ("Next" links or `?page=N`) and follows links matching the job-page pattern. | `scrape_jobs.py` |
+| Crawl | A Scrapling `Spider` walks listing pages ("Next" links, `?page=N`, or scrolling in a headless browser for JavaScript sites) and follows links matching the job-page pattern. It stops paging when a page brings no new jobs. | `scrape_jobs.py` |
 | Extract | Reads the schema.org **JobPosting JSON-LD** that job portals publish for Google for Jobs. Falls back to page title and text when it is missing. | `find_job_postings`, `fallback_job` |
 | Clean | Strips HTML, converts salary to RM per month, maps employment type. | `html_to_text`, `parse_salary` |
 | Integrate | Maps the town to a **JKM district** (e.g. Bangi → Hulu Langat, Cyberjaya → Sepang), so it lines up with the JKM OKU data. Keeps Selangor jobs only. | `district_from_location` |
@@ -94,4 +105,6 @@ python -m pytest -q
 
 The tests cover extraction from sample pages, plus a full crawl of a small
 local website. That run checks link following, pagination, robots.txt,
-de-duplication and the Selangor filter.
+de-duplication and the Selangor filter. A browser test covers a JavaScript,
+infinite-scroll listing like Hiredly's. It runs when `SCRAPLING_EXECUTABLE_PATH`
+points to a Chromium build, and is skipped otherwise.

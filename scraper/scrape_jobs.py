@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import csv
 import json
+import os
 import re
 import sys
 from collections import Counter
@@ -26,7 +27,7 @@ from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
 
 from scrapling.fetchers import AsyncStealthySession, FetcherSession
-from scrapling.spiders import Response, Spider
+from scrapling.spiders import Request, Response, Spider
 
 from extract import (
     FIELDS,
@@ -44,9 +45,12 @@ HERE = Path(__file__).resolve().parent
 SITES: dict[str, dict] = {
     "hiredly": {
         "source": "Hiredly",
-        "start_urls": ["https://my.hiredly.com/jobs"],
+        "start_urls": ["https://my.hiredly.com/jobs?state=Selangor"],
         "link_pattern": r"/jobs/jobs-malaysia-[^/?#]+$",
-        "page_param": "page",
+        # Job cards are added by JavaScript: open listing pages in a browser
+        # and scroll to load more. Job pages themselves are plain HTML.
+        "listing_browser": True,
+        "scroll": 8,
     },
     "maukerja": {
         "source": "Maukerja",
@@ -55,6 +59,25 @@ SITES: dict[str, dict] = {
         "page_param": "page",
     },
 }
+
+# Optional: use an existing Chromium instead of the one `scrapling install` downloads.
+BROWSER_PATH = (
+    {"executable_path": os.environ["SCRAPLING_EXECUTABLE_PATH"]}
+    if os.environ.get("SCRAPLING_EXECUTABLE_PATH")
+    else {}
+)
+
+
+def make_scroller(times: int):
+    """Browser action: scroll down `times` times so infinite-scroll lists load."""
+
+    async def scroll(page):
+        for _ in range(times):
+            await page.mouse.wheel(0, 5000)
+            await page.wait_for_timeout(1500)
+
+    return scroll
+
 
 _NEXT_TEXT = re.compile(r"^\s*(next|seterusnya|›|»|>)\s*$", re.I)
 
@@ -71,6 +94,15 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
     domains = {urlparse(u).netloc for u in preset["start_urls"]}
     source = preset["source"]
     page_param = preset.get("page_param")
+    listing_browser = args.browser or preset.get("listing_browser", False)
+    scroll_times = getattr(args, "scroll", None)
+    if scroll_times is None:
+        scroll_times = preset.get("scroll", 0)
+    listing_sid = "browser" if listing_browser else "http"
+    job_sid = "browser" if args.browser else "http"
+    listing_kwargs = (
+        {"page_action": make_scroller(scroll_times)} if listing_browser and scroll_times else {}
+    )
 
     class JobSpider(Spider):
         name = f"oku_jobs_{source.lower().replace(' ', '_')}"
@@ -87,17 +119,29 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
             self.listing_pages = 0
 
         def configure_sessions(self, manager):
-            if args.browser:
+            # Fast HTTP session (also fetches robots.txt) + a browser started only if needed.
+            manager.add("http", FetcherSession(impersonate="chrome", timeout=30), default=True)
+            if listing_browser:
                 manager.add(
-                    "default",
-                    AsyncStealthySession(headless=True, network_idle=True, disable_resources=True),
+                    "browser",
+                    AsyncStealthySession(
+                        headless=True,
+                        network_idle=True,
+                        disable_resources=True,
+                        timeout=60_000,
+                        **BROWSER_PATH,
+                    ),
+                    lazy=True,
                 )
-            else:
-                manager.add("default", FetcherSession(impersonate="chrome", timeout=30))
+
+        async def start_requests(self):
+            for url in self.start_urls:
+                yield Request(url, sid=listing_sid, callback=self.parse, **listing_kwargs)
 
         async def parse(self, response: Response):
             """Listing page: queue job links, then the next listing page."""
             self.listing_pages += 1
+            before = len(self.job_links)
             # Some listing pages embed every job as JSON-LD already.
             for item in self.rows_from(response):
                 yield item
@@ -109,9 +153,15 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
                     if len(self.job_links) >= args.max_jobs:
                         break
                     self.job_links.add(url)
-                    yield response.follow(url, callback=self.parse_job, priority=10)
+                    yield Request(url, sid=job_sid, callback=self.parse_job, priority=10)
 
-            if self.listing_pages >= args.max_pages or len(self.job_links) >= args.max_jobs:
+            new_links = len(self.job_links) - before
+            self.logger.info(f"Listing page {self.listing_pages}: {new_links} new job links")
+            if (
+                new_links == 0
+                or self.listing_pages >= args.max_pages
+                or len(self.job_links) >= args.max_jobs
+            ):
                 return
             nxt = response.css('a[rel="next"]::attr(href)').get()
             if not nxt:
@@ -122,7 +172,9 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
             if not nxt and page_param:
                 nxt = with_page(preset["start_urls"][0], page_param, self.listing_pages + 1)
             if nxt:
-                yield response.follow(nxt, callback=self.parse, priority=0)
+                yield Request(
+                    response.urljoin(nxt), sid=listing_sid, callback=self.parse, **listing_kwargs
+                )
 
         async def parse_job(self, response: Response):
             rows = list(self.rows_from(response))
@@ -159,12 +211,23 @@ def write_outputs(rows: list[dict], out: Path) -> None:
     out.with_suffix(".json").write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
 
 
-def inspect(url: str, browser: bool) -> None:
+def inspect(url: str, browser: bool, scroll: int = 0) -> None:
     """Print what the scraper can see on a page, to configure a new site."""
     if browser:
         from scrapling.fetchers import StealthyFetcher
 
-        page = StealthyFetcher.fetch(url, headless=True, network_idle=True)
+        def scroll_sync(page):
+            for _ in range(scroll):
+                page.mouse.wheel(0, 5000)
+                page.wait_for_timeout(1500)
+
+        page = StealthyFetcher.fetch(
+            url,
+            headless=True,
+            network_idle=True,
+            page_action=scroll_sync if scroll else None,
+            **BROWSER_PATH,
+        )
     else:
         from scrapling.fetchers import Fetcher
 
@@ -198,14 +261,15 @@ def main() -> int:
     p.add_argument("--max-jobs", type=int, default=100, help="stop after this many job pages (default 100)")
     p.add_argument("--max-pages", type=int, default=10, help="max listing pages to walk (default 10)")
     p.add_argument("--delay", type=float, default=3.0, help="seconds between requests (default 3)")
-    p.add_argument("--browser", action="store_true", help="render pages in a headless browser (JavaScript sites)")
+    p.add_argument("--browser", action="store_true", help="render every page in a headless browser (JavaScript sites)")
+    p.add_argument("--scroll", type=int, help="times to scroll each browser listing page (infinite-scroll sites)")
     p.add_argument("--all-locations", action="store_true", help="keep jobs outside Selangor too")
     p.add_argument("--out", default=str(HERE / "output" / "jobs.csv"), help="CSV output path")
     p.add_argument("--inspect", metavar="URL", help="show links and JSON-LD found on one page, then exit")
     args = p.parse_args()
 
     if args.inspect:
-        inspect(args.inspect, args.browser)
+        inspect(args.inspect, args.browser, args.scroll or 0)
         return 0
 
     if args.site:

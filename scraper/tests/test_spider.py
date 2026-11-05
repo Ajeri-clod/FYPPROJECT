@@ -1,6 +1,7 @@
 """End-to-end: run the real spider against a tiny local job site."""
 
 import argparse
+import os
 import csv
 import functools
 import http.server
@@ -52,7 +53,7 @@ def site(tmp_path):
 
 def test_spider_crawls_follows_pages_and_obeys_robots(site, tmp_path):
     args = argparse.Namespace(
-        max_jobs=20, max_pages=5, delay=0.1, browser=False, all_locations=False
+        max_jobs=20, max_pages=5, delay=0.1, browser=False, all_locations=False, scroll=None
     )
     preset = {
         "source": "Test",
@@ -76,3 +77,39 @@ def test_spider_crawls_follows_pages_and_obeys_robots(site, tmp_path):
         written = list(csv.DictReader(f))
     assert len(written) == 3 and written[0]["scrapedOn"]
     assert out.with_suffix(".json").exists()
+
+
+INFINITE_LIST = """<html><body><div id="list"></div><script>
+let n = 0;
+function more() {  // like Hiredly: job cards are added by JavaScript on scroll
+  const list = document.getElementById("list");
+  for (const slug of [["1-customer-service"], ["2-packer"]][n] || []) {
+    const a = document.createElement("a"); a.href = "/job/" + slug; a.textContent = slug;
+    list.appendChild(a); list.appendChild(document.createElement("div")).style.height = "3000px";
+  }
+  n++;
+}
+more();
+window.addEventListener("scroll", () => { if (innerHeight + scrollY >= document.body.scrollHeight - 50) more(); });
+</script></body></html>"""
+
+
+@pytest.mark.skipif(
+    not os.environ.get("SCRAPLING_EXECUTABLE_PATH"),
+    reason="needs a browser: set SCRAPLING_EXECUTABLE_PATH or run `scrapling install`",
+)
+def test_javascript_listing_with_infinite_scroll(site, tmp_path):
+    (tmp_path / "site" / "js-list.html").write_text(INFINITE_LIST)
+    args = argparse.Namespace(
+        max_jobs=20, max_pages=1, delay=0.1, browser=False, all_locations=False, scroll=3
+    )
+    preset = {
+        "source": "Test",
+        "start_urls": [f"{site}/js-list.html"],
+        "link_pattern": r"/job/\d+-[^/]+$",
+        "listing_browser": True,
+    }
+    result = scrape_jobs.build_spider(args, preset)().start()
+    titles = {dict(i)["title"] for i in result.items}
+    # Without the browser no links exist; without scrolling only the first appears.
+    assert titles == {"Customer Service Executive", "Warehouse Packer"}
