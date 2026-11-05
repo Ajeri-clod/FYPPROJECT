@@ -28,6 +28,7 @@ import type { Job } from "@/db/schema";
 import { createJobColumns } from "@/features/jobs/columns";
 import { jobFilters, jobTableConfig } from "@/features/jobs/config";
 import {
+  allJobsQuery,
   jobsListQuery,
   useCreateJob,
   useDeleteJob,
@@ -36,6 +37,7 @@ import {
 import {
   employmentTypes,
   industries,
+  isSampleData,
   type JobFormValues,
   jobFormSchema,
   jobInputSchema,
@@ -50,7 +52,10 @@ export const Route = createFileRoute("/_app/jobs")({
   validateSearch: jobListParamsSchema,
   loaderDeps: ({ search }) => search,
   loader: ({ context, deps }) =>
-    context.queryClient.ensureQueryData(jobsListQuery(deps)),
+    Promise.all([
+      context.queryClient.ensureQueryData(jobsListQuery(deps)),
+      context.queryClient.ensureQueryData(allJobsQuery()),
+    ]),
   component: JobsPage,
 });
 
@@ -66,6 +71,7 @@ function JobsPage() {
     ...jobsListQuery(search),
     placeholderData: keepPreviousData,
   });
+  const all = useQuery(allJobsQuery());
   const remove = useDeleteJob();
   const confirm = useConfirm();
 
@@ -92,7 +98,7 @@ function JobsPage() {
       <PageHeader
         title="Job Postings"
         description="Vacancies in Selangor from online job portals and partner employers. Open postings feed Labour Market Insights and Job Recommendations."
-        actions={<SampleDataBadge />}
+        actions={isSampleData(all.data ?? []) ? <SampleDataBadge /> : null}
       />
 
       <DataTable
@@ -152,6 +158,7 @@ const EMPTY_FORM: JobFormValues = {
   salaryMax: null,
   status: "open",
   source: "Manual entry",
+  url: "",
 };
 
 const toOptions = (values: readonly string[]) =>
@@ -176,6 +183,7 @@ function toForm(row?: Job): JobFormValues {
     salaryMax: row.salaryMax,
     status: row.status as JobFormValues["status"],
     source: row.source,
+    url: row.url ?? "",
   };
 }
 
@@ -327,7 +335,16 @@ function JobForm({
         description="Ramp / lift access, screen-reader support, sign language, job coach…"
         rows={2}
       />
-      <TextField form={form} name="source" label="Source" />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <TextField form={form} name="source" label="Source" />
+        <TextField
+          form={form}
+          name="url"
+          label="Link to original advert"
+          type="url"
+          placeholder="https://"
+        />
+      </div>
 
       <DialogFooter>
         <DialogClose render={<Button type="button" variant="outline" />}>

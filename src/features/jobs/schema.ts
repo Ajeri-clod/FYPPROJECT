@@ -22,6 +22,7 @@ export const industries = [
   "Finance & Insurance",
   "Public Administration",
   "Education",
+  "Other",
 ] as const;
 
 export const selangorDistricts = [
@@ -56,6 +57,10 @@ export const jobInputSchema = z.object({
   salaryMax: optionalSalary,
   status: z.enum(jobStatuses),
   source: z.string().optional().default("Manual entry"),
+  url: z
+    .union([z.literal(""), z.url("Enter a full link, e.g. https://…")])
+    .optional()
+    .default(""),
 });
 export type JobInput = z.input<typeof jobInputSchema>;
 
@@ -73,6 +78,7 @@ export const jobFormSchema = z.object({
   salaryMax: z.number().int().min(0).nullish(),
   status: z.enum(jobStatuses),
   source: z.string(),
+  url: z.union([z.literal(""), z.url("Enter a full link, e.g. https://…")]),
 });
 export type JobFormValues = z.infer<typeof jobFormSchema>;
 
@@ -92,6 +98,11 @@ export const jobListParamsSchema = z.object({
   industry: z.string().optional().default(""),
 });
 export type JobListParams = z.infer<typeof jobListParamsSchema>;
+
+/** True while every posting is one of the bundled sample postings. */
+export function isSampleData(jobs: { source: string }[]): boolean {
+  return jobs.length > 0 && jobs.every((j) => j.source === "Sample posting");
+}
 
 /** Split the stored comma-separated skills string into clean, unique skills. */
 export function parseSkills(skills: string | null | undefined): string[] {

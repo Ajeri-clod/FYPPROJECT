@@ -51,11 +51,22 @@ Re-run it whenever JKM sends a newer extract. It translates the Malay labels
 employment rates for working-age OKU (15–64; employed = private sector,
 government or self-employed).
 
-### Still sample data (replace next)
+### Job postings → scraped with `scraper/`
 
-- **Job postings**: `src/features/jobs/demo-data.ts`, 30 illustrative
-  Selangor vacancies. Replace them with the scraped job-portal dataset, or add
-  postings through the `/jobs` form.
+The Labour Market, Recommendations and Skill-Gap modules use job postings. Out
+of the box they show 30 sample vacancies (`src/features/jobs/demo-data.ts`).
+To load real ones, double-click `scrape-jobs.bat` (Windows), or run the
+scraper and then:
+
+```bash
+bun run import-jobs scraper/output/jobs.csv
+```
+
+See [`scraper/README.md`](scraper/README.md) for how the scraper works and its
+responsible-scraping safeguards. Postings can also be added through the
+`/jobs` form.
+
+### Still sample data
 - **Job-seeker profiles**: `src/features/matching/candidates.ts`, 16 synthetic
   profiles. The JKM registry has no skills field, so real candidate skills must
   come from another source (e.g. JKM/PERKESO job-seeker forms).

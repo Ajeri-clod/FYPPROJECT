@@ -57,3 +57,10 @@ backends/**/.env
 *.xlsx
 *.xls
 *.csv
+
+# scraper (Python)
+scraper/.venv/
+scraper/output/
+scraper/.scrapling_cache/
+__pycache__/
+.pytest_cache/

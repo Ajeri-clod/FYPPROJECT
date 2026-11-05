@@ -79,6 +79,8 @@ export const jobs = pgTable("jobs", {
   salaryMax: integer("salary_max"),
   status: text("status").notNull().default("open"),
   source: text("source").notNull().default("Manual entry"),
+  /** Link to the original advert (scraped postings). */
+  url: text("url"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });

@@ -13,6 +13,7 @@ import { RankedBars } from "@/components/oku/RankedBars";
 import { SampleDataBadge, SourceNote } from "@/components/oku/SourceNote";
 import { Button } from "@/components/ui/button";
 import { allJobsQuery } from "@/features/jobs/queries";
+import { isSampleData } from "@/features/jobs/schema";
 import { countSkills } from "@/features/matching/skill-gap";
 import { formatNumber, formatPercent, percentOf } from "@/lib/oku-format";
 
@@ -63,7 +64,7 @@ function LabourMarketPage() {
         description="What Selangor employers are hiring for: industries, locations, pay and the skills they ask for."
         actions={
           <>
-            <SampleDataBadge />
+            {isSampleData(jobs) ? <SampleDataBadge /> : null}
             <Button
               variant="outline"
               nativeButton={false}
@@ -151,9 +152,10 @@ function LabourMarketPage() {
       </div>
 
       <SourceNote>
-        Built from the Job Postings list. It currently holds sample Selangor
-        vacancies — load the scraped job-portal data (JobsMalaysia, Jobstreet,
-        Hiredly) to replace them.
+        Built from the open postings in Job Postings
+        {isSampleData(jobs)
+          ? " — currently sample vacancies. Scrape real postings with scraper/ and load them with `bun run import-jobs`."
+          : `, sourced from ${[...new Set(jobs.map((j) => j.source))].join(", ")}.`}
       </SourceNote>
     </div>
   );

@@ -101,7 +101,7 @@ function SkillGapPage() {
       <PageHeader
         title="Skill-Gap Analytics"
         description="Where job-seekers' skills fall short of what employers ask for, across Selangor and for each individual."
-        actions={<SampleDataBadge />}
+        actions={<SampleDataBadge label="Sample job-seekers" />}
       />
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">

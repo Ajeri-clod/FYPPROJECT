@@ -1,5 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import importedJobs from "@/data/jobs-imported.json";
 import { type Job, jobs, type NewJob } from "@/db/schema";
 import { drizzleRepository } from "@/infra/data/drizzle-repository";
 import { memoryRepository } from "@/infra/data/memory-repository";
@@ -14,9 +15,26 @@ import {
   jobUpdateSchema,
 } from "./schema";
 
+interface ImportedJob extends Omit<Job, "createdAt" | "updatedAt"> {
+  createdAt: string;
+  updatedAt: string;
+}
+
+/**
+ * Seed rows for the in-memory backend: scraped postings loaded with
+ * `bun run import-jobs <csv>` when there are any, otherwise the sample postings.
+ */
+const seedJobs: Job[] = (importedJobs as ImportedJob[]).length
+  ? (importedJobs as ImportedJob[]).map((j) => ({
+      ...j,
+      createdAt: new Date(j.createdAt),
+      updatedAt: new Date(j.updatedAt),
+    }))
+  : demoJobs;
+
 /**
  * Job postings — Postgres via Drizzle when DATABASE_URL is set, otherwise the
- * in-memory adapter seeded with sample postings (zero-config `bun dev`).
+ * in-memory adapter seeded with `seedJobs` (zero-config `bun dev`).
  */
 export const jobsRepository: Repository<Job, NewJob> = hasDatabase
   ? drizzleRepository(jobs, {
@@ -36,7 +54,7 @@ export const jobsRepository: Repository<Job, NewJob> = hasDatabase
       defaultSort: { column: jobs.createdAt, dir: "desc" },
       updatedAtKey: "updatedAt",
     })
-  : memoryRepository<Job, NewJob>(demoJobs, {
+  : memoryRepository<Job, NewJob>(seedJobs, {
       searchFields: ["title", "employer", "skills"],
       sortFields: ["title", "employer", "district", "salaryMax", "createdAt"],
       filterFields: ["status", "district", "industry"],

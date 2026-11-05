@@ -85,7 +85,7 @@ function RecommendationsPage() {
       <PageHeader
         title="Job Recommendations"
         description="Open vacancies ranked by how closely their requirements match a job-seeker's skills (TF-IDF + cosine similarity)."
-        actions={<SampleDataBadge />}
+        actions={<SampleDataBadge label="Sample job-seekers" />}
       />
 
       <div className="grid gap-4 lg:grid-cols-3">
@@ -180,7 +180,20 @@ function RecommendationsPage() {
                         <p className="text-xs text-muted-foreground">
                           #{index + 1}
                         </p>
-                        <h3 className="font-medium">{job.title}</h3>
+                        <h3 className="font-medium">
+                          {job.url ? (
+                            <a
+                              href={job.url}
+                              target="_blank"
+                              rel="noreferrer"
+                              className="hover:underline"
+                            >
+                              {job.title} ↗
+                            </a>
+                          ) : (
+                            job.title
+                          )}
+                        </h3>
                         <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <BuildingsIcon size={12} />

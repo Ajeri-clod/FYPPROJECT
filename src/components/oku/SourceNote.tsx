@@ -13,13 +13,13 @@ export function SourceNote({ children }: { children: ReactNode }) {
 }
 
 /** Marks a page that still runs on sample data. */
-export function SampleDataBadge() {
+export function SampleDataBadge({ label = "Sample data" }: { label?: string }) {
   return (
     <Badge
       variant="outline"
       className="border-amber-500/40 bg-amber-500/10 text-amber-700 dark:text-amber-400"
     >
-      Sample data
+      {label}
     </Badge>
   );
 }
