@@ -21,7 +21,7 @@ import json
 import os
 import re
 import sys
-from collections import Counter
+from collections import Counter, deque
 from datetime import date
 from pathlib import Path
 from urllib.parse import parse_qsl, urlencode, urlparse, urlunparse
@@ -35,6 +35,8 @@ from extract import (
     fallback_job,
     find_job_postings,
     is_selangor,
+    job_header,
+    job_section,
     normalise_job,
 )
 
@@ -45,10 +47,18 @@ HERE = Path(__file__).resolve().parent
 SITES: dict[str, dict] = {
     "hiredly": {
         "source": "Hiredly",
+        # Hiredly's sitemap lists every live job page (~7,600, all Malaysia), so
+        # no browser is needed; non-Selangor jobs are filtered after fetching.
+        "sitemap": "https://my.hiredly.com/sitemap-jobs.xml",
+        "start_urls": ["https://my.hiredly.com/sitemap-jobs.xml"],
+        "link_pattern": r"/jobs/jobs-malaysia-[^/?#]+$",
+    },
+    "hiredly-listing": {
+        # Alternative: the Selangor listing page, rendered in a browser and
+        # scrolled (JavaScript job cards). Finds fewer jobs than the sitemap.
+        "source": "Hiredly",
         "start_urls": ["https://my.hiredly.com/jobs?state=Selangor"],
         "link_pattern": r"/jobs/jobs-malaysia-[^/?#]+$",
-        # Job cards are added by JavaScript: open listing pages in a browser
-        # and scroll to load more. Job pages themselves are plain HTML.
         "listing_browser": True,
         "scroll": 8,
     },
@@ -89,11 +99,17 @@ def with_page(url: str, param: str, number: int) -> str:
     return urlunparse(parts._replace(query=urlencode(query)))
 
 
+_LOC = re.compile(r"<loc>\s*([^<\s]+)\s*</loc>")
+
+
 def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
     link_rx = re.compile(preset["link_pattern"])
     domains = {urlparse(u).netloc for u in preset["start_urls"]}
     source = preset["source"]
     page_param = preset.get("page_param")
+    sitemap = preset.get("sitemap")
+    selangor_only = not getattr(args, "all_locations", False)
+    max_fetch = getattr(args, "max_fetch", None) or args.max_jobs * 5
     listing_browser = args.browser or preset.get("listing_browser", False)
     scroll_times = getattr(args, "scroll", None)
     if scroll_times is None:
@@ -117,6 +133,10 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
             super().__init__(*a, **kw)
             self.job_links: set[str] = set()
             self.listing_pages = 0
+            self.pending: deque[str] = deque()  # sitemap mode: job URLs not yet fetched
+            self.fetched = 0
+            self.kept = 0
+            self.kept_keys: set[tuple[str, str, str]] = set()
 
         def configure_sessions(self, manager):
             # Fast HTTP session (also fetches robots.txt) + a browser started only if needed.
@@ -135,8 +155,35 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
                 )
 
         async def start_requests(self):
+            if sitemap:
+                yield Request(sitemap, sid="http", callback=self.parse_sitemap)
+                return
             for url in self.start_urls:
                 yield Request(url, sid=listing_sid, callback=self.parse, **listing_kwargs)
+
+        async def parse_sitemap(self, response: Response):
+            """Read job URLs from a sitemap (or sitemap index), then fetch them
+            one chain at a time until enough Selangor jobs are kept."""
+            body = response.body.decode("utf-8", "replace") if isinstance(response.body, bytes) else str(response.body)
+            for loc in _LOC.findall(body):
+                if loc.endswith(".xml") or loc.endswith(".xml.gz"):
+                    yield Request(loc, sid="http", callback=self.parse_sitemap)
+                elif link_rx.search(urlparse(loc).path) and loc not in self.job_links:
+                    self.job_links.add(loc)
+                    self.pending.append(loc)
+            self.logger.info(f"Sitemap: {len(self.pending)} job URLs queued")
+            # One chain: each job page queues the next only while more jobs are
+            # needed (requests to a site are one-at-a-time anyway), so the crawl
+            # stops exactly when the target is reached.
+            request = self.next_job_request()
+            if request:
+                yield request
+
+        def next_job_request(self):
+            if self.kept >= args.max_jobs or self.fetched >= max_fetch or not self.pending:
+                return None
+            self.fetched += 1
+            return Request(self.pending.popleft(), sid=job_sid, callback=self.parse_job)
 
         async def parse(self, response: Response):
             """Listing page: queue job links, then the next listing page."""
@@ -186,19 +233,35 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
                 )
                 rows = [fallback_job(title, response.get_all_text() or "", "", response.url, source)]
             for row in rows:
+                if keep(row, selangor_only) and dedupe_key(row) not in self.kept_keys:
+                    self.kept_keys.add(dedupe_key(row))
+                    self.kept += 1
                 yield row
+            if sitemap:
+                request = self.next_job_request()
+                if request:
+                    yield request
+                elif self.pending and self.kept >= args.max_jobs:
+                    self.logger.info(f"Kept {self.kept} jobs - target reached, stopping.")
 
         def rows_from(self, response: Response):
-            for job in find_job_postings(response.html_content):
-                yield normalise_job(job, response.url, source)
+            jobs = find_job_postings(response.html_content)
+            text = (response.get_all_text() or "") if jobs else ""
+            section, header = job_section(text), job_header(text)
+            for job in jobs:
+                yield normalise_job(job, response.url, source, section, header)
 
     return JobSpider
 
 
 def keep(row: dict, selangor_only: bool) -> bool:
+    """Has a title, is still open (not past its closing date) and, by default, is in Selangor."""
     if not row["title"]:
         return False
-    return not selangor_only or row["district"] or is_selangor(row["location"])
+    closing = row.get("validThrough") or ""
+    if len(closing) == 10 and closing < date.today().isoformat():
+        return False
+    return not selangor_only or bool(row["district"] or is_selangor(row["location"]))
 
 
 def write_outputs(rows: list[dict], out: Path) -> None:
@@ -258,7 +321,8 @@ def main() -> int:
     p.add_argument("--start-url", action="append", help="listing/search page to start from (repeatable)")
     p.add_argument("--link-pattern", help="regex matching job-detail URL paths")
     p.add_argument("--source", default="Web", help="source label stored with each job")
-    p.add_argument("--max-jobs", type=int, default=100, help="stop after this many job pages (default 100)")
+    p.add_argument("--max-jobs", type=int, default=100, help="target number of jobs (default 100); sitemap mode keeps fetching until this many Selangor jobs are kept")
+    p.add_argument("--max-fetch", type=int, help="sitemap mode: most job pages to fetch (default 5 x --max-jobs)")
     p.add_argument("--max-pages", type=int, default=10, help="max listing pages to walk (default 10)")
     p.add_argument("--delay", type=float, default=3.0, help="seconds between requests (default 3)")
     p.add_argument("--browser", action="store_true", help="render every page in a headless browser (JavaScript sites)")

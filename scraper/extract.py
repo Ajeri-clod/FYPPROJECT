@@ -96,6 +96,40 @@ def html_to_text(value: str | None) -> str:
     return "\n".join(line for line in lines if line)
 
 
+# ------------------------------------------------------- job text section
+_SECTION_START = re.compile(
+    r"^\s*(job descriptions?|penerangan kerja|deskripsi kerja|job requirements?|"
+    r"requirements|responsibilities|tanggungjawab|kelayakan|qualifications?)\s*:?\s*$",
+    re.I | re.M,
+)
+_SECTION_END = re.compile(
+    r"^\s*(company benefits|benefits|additional info(?:rmation)?|about (?:the )?company|"
+    r"company (?:overview|activity|info)|similar jobs|jobs you might like|report (?:this )?job|"
+    r"manfaat(?: tambahan)?|tentang syarikat|maklumat tambahan|kerja serupa|share this job)\s*:?\s*$",
+    re.I | re.M,
+)
+
+
+def job_header(page_text: str, limit: int = 1500) -> str:
+    """Page text above the description heading (title, pay, location block)."""
+    start = _SECTION_START.search(page_text or "")
+    return (page_text[: start.start()] if start else "")[-limit:]
+
+
+def job_section(page_text: str, limit: int = 8000) -> str:
+    """The job-description part of a page's visible text, between the first
+    description heading and the benefits / company / similar-jobs sections.
+    Returns '' when no heading is found, so menus and footers ("Sales jobs",
+    "Admin jobs" ...) never leak into skill extraction."""
+    if not page_text:
+        return ""
+    start = _SECTION_START.search(page_text)
+    if not start:
+        return ""
+    end = _SECTION_END.search(page_text, start.end())
+    return page_text[start.start(): end.start() if end else start.start() + limit][:limit].strip()
+
+
 # ----------------------------------------------------------------- JSON-LD
 _LD_SCRIPT = re.compile(
     r'<script[^>]+type=["\']application/ld\+json["\'][^>]*>(.*?)</script>',
@@ -136,7 +170,7 @@ def find_job_postings(page_html: str) -> list[dict]:
 
 
 def _text(value: Any) -> str:
-    if value is None:
+    if value is None or (isinstance(value, str) and value.strip().lower() in {"none", "null", "n/a"}):
         return ""
     if isinstance(value, dict):
         return _text(value.get("name") or value.get("value") or "")
@@ -194,6 +228,37 @@ def parse_salary(base_salary: Any) -> tuple[int | None, int | None]:
     return to_int(lo), to_int(hi)
 
 
+_RM_RANGE = re.compile(
+    r"(?:RM|MYR)\s?([\d,.]+)\s*(k)?\s*(?:-|–|to)\s*(?:RM|MYR)?\s?([\d,.]+)\s*(k)?", re.I
+)
+_RM_SINGLE = re.compile(r"(?:RM|MYR)\s?([\d,.]+)\s*(k)?\b", re.I)
+
+
+def salary_from_text(text: str) -> tuple[int | None, int | None]:
+    """'RM 3000 - RM 5000', 'RM8K - RM12K', 'MYR3,200 - MYR4,500' -> monthly (min, max).
+    Amounts outside RM 500-100,000 are ignored (likely not a monthly salary)."""
+
+    def amount(num: str, k: str | None) -> int | None:
+        try:
+            value = float(num.replace(",", "")) * (1000 if k else 1)
+        except ValueError:
+            return None
+        return round(value) if 500 <= value <= 100_000 else None
+
+    if not text:
+        return None, None
+    m = _RM_RANGE.search(text)
+    if m:
+        lo, hi = amount(m.group(1), m.group(2)), amount(m.group(3), m.group(4))
+        if lo and hi and lo <= hi:
+            return lo, hi
+    m = _RM_SINGLE.search(text)
+    if m:
+        value = amount(m.group(1), m.group(2))
+        return value, value
+    return None, None
+
+
 # ----------------------------------------------------------- employment type
 _EMPLOYMENT = {
     "FULL_TIME": "Full-time", "PART_TIME": "Part-time", "CONTRACTOR": "Contract",
@@ -239,6 +304,20 @@ def classify_industry(*texts: str, explicit: str = "") -> str:
         if direct != "Other":
             return direct
     blob = " ".join(t for t in texts if t).lower()
+    return _vote(blob)
+
+
+def classify_job_industry(title: str, employer: str, description: str, explicit: str = "") -> str:
+    """Posting's own industry field first, then title + employer, then the description."""
+    for text in (explicit, f"{title} {employer}", description[:1500]):
+        if text:
+            found = _vote(text.lower())
+            if found != "Other":
+                return found
+    return "Other"
+
+
+def _vote(blob: str) -> str:
     best, best_hits = "Other", 0
     for industry, words in INDUSTRY_KEYWORDS.items():
         hits = sum(1 for w in words if re.search(rf"\b{re.escape(w)}\b", blob))
@@ -273,11 +352,21 @@ FIELDS = [
 ]
 
 
-def normalise_job(job: dict, url: str, source: str) -> dict:
-    """schema.org JobPosting -> one dashboard row."""
+def normalise_job(
+    job: dict, url: str, source: str, page_section: str = "", page_header: str = ""
+) -> dict:
+    """schema.org JobPosting -> one dashboard row.
+
+    `page_section` is the job-description text taken from the page itself
+    (see job_section). Some portals cut the JSON-LD description short, so the
+    longer of the two is used for the description and skill extraction.
+    `page_header` is the page text above the description, used to read a
+    salary shown on the page when the JSON-LD has none."""
     title = _text(job.get("title"))
     employer = _text(job.get("hiringOrganization"))
     description = html_to_text(job.get("description"))
+    if len(page_section) > len(description):
+        description = page_section
     location = _location(job)
     explicit = " , ".join(
         _text(job.get(k))
@@ -285,11 +374,13 @@ def normalise_job(job: dict, url: str, source: str) -> dict:
                   "educationRequirements", "responsibilities")
     )
     salary_min, salary_max = parse_salary(job.get("baseSalary"))
+    if salary_min is None and salary_max is None:
+        salary_min, salary_max = salary_from_text(page_header)
     return {
         "title": title,
         "employer": employer,
-        "industry": classify_industry(
-            title, employer, description[:1500],
+        "industry": classify_job_industry(
+            title, employer, description,
             explicit=f'{_text(job.get("industry"))} {_text(job.get("occupationalCategory"))}'.strip(),
         ),
         "district": district_from_location(location),
@@ -314,7 +405,7 @@ def fallback_job(title: str, body_text: str, location: str, url: str, source: st
     return {
         "title": title.strip(),
         "employer": "",
-        "industry": classify_industry(title, body_text[:1500]),
+        "industry": classify_job_industry(title, "", body_text),
         "district": district_from_location(location or body_text[:3000]),
         "employmentType": employment_type(body_text[:3000]),
         "skills": ", ".join(extract_skills(title, body_text)),

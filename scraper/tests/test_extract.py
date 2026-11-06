@@ -72,3 +72,59 @@ def test_fallback_without_json_ld():
     assert row["district"] == "Klang"
     assert row["parsedFrom"] == "html"
     assert {"Microsoft Excel", "bookkeeping", "teamwork"} <= set(row["skills"].split(", "))
+
+
+PAGE_TEXT = """Jobs
+Sales jobs
+Admin jobs
+Senior Account Manager
+Job Description
+Grow the dielectric fluid business across South-East Asia.
+Fluent in Bahasa Malaysia and English. Team player, able to work independently.
+Company Benefits
+Free coffee and a customer service hotline
+Similar Jobs
+Cashier
+"""
+
+
+def test_job_section_skips_menus_and_footer():
+    section = e.job_section(PAGE_TEXT)
+    assert section.startswith("Job Description")
+    assert "dielectric" in section
+    assert "Sales jobs" not in section and "customer service" not in section
+
+
+def test_job_section_needs_a_heading():
+    assert e.job_section("Sales jobs\nAdmin jobs\nCashier") == ""
+
+
+def test_truncated_json_ld_uses_page_section_and_ignores_none():
+    job = {
+        "@type": "JobPosting",
+        "title": "Senior Account Manager",
+        "hiringOrganization": {"name": "Cargill"},
+        "skills": "None",
+        "description": "Grow the business...",
+        "jobLocation": {"address": {"addressLocality": "Puchong", "addressRegion": "Selangor"}},
+    }
+    row = e.normalise_job(job, "u", "Hiredly", e.job_section(PAGE_TEXT))
+    skills = row["skills"].split(", ")
+    assert {"Bahasa Malaysia", "English", "teamwork", "independent work"} <= set(skills)
+    assert "sales" not in skills and "None" not in row["skills"]
+    assert row["district"] == "Subang Jaya"
+
+
+def test_salary_from_page_text():
+    assert e.salary_from_text("Video Editor\nRM 3000 - RM 5000\nShah Alam") == (3000, 5000)
+    assert e.salary_from_text("RM 8K - RM 12K") == (8000, 12000)
+    assert e.salary_from_text("MYR3,200 - MYR4,500 Per Month") == (3200, 4500)
+    assert e.salary_from_text("RM 900") == (900, 900)
+    assert e.salary_from_text("Undisclosed") == (None, None)
+    assert e.salary_from_text("RM 50") == (None, None)  # not a monthly salary
+
+
+def test_industry_prefers_title_over_description():
+    assert e.classify_job_industry(
+        "Chief Financial Officer", "Baba Eco Group", "We run a warehouse and delivery fleet."
+    ) == "Finance & Insurance"

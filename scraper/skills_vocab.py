@@ -110,7 +110,7 @@ SKILLS: dict[str, str] = {
     "attention to detail": r"attention to details?|detail[- ]oriented|meticulous|teliti",
     "time management": r"time management|punctual\w*|meet deadlines",
     "following instructions": r"follow(?:ing)? instructions|ikut arahan",
-    "independent work": r"work independently|self-?motivated",
+    "independent work": r"work(?:ing)? independently|self-?motivated|self-?driven",
     "leadership": r"leadership|supervis\w+",
     "creativity": r"creativ\w+|kreatif",
     "empathy": r"empath\w+|patien(?:t|ce)",

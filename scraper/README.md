@@ -10,13 +10,15 @@ portals" data source in Research Objective 1 of the proposal.
    `winget install Python.Python.3.12`
 2. Double-click **`scrape-jobs.bat`** in the project folder. It:
    - sets up the scraper the first time (`scraper\.venv`);
-   - scrapes Hiredly and Maukerja (100 job pages each by default);
+   - scrapes Hiredly and Maukerja, keeping 100 Selangor jobs from each by default;
    - merges them into `scraper\output\jobs.csv`;
    - loads them into the dashboard (`bun run import-jobs`).
 3. Restart the dashboard (`start-dashboard.bat`). The "Sample data" badges
    disappear once real postings are loaded.
 
-At ~3 seconds per page, 100 pages per site takes about 10–15 minutes.
+At ~3 seconds per page this takes about 15–20 minutes. Hiredly lists jobs from
+all of Malaysia, so the scraper reads more pages than it keeps; roughly 2 in 3
+were in Selangor in testing.
 
 ## Command line
 
@@ -58,23 +60,37 @@ to load more jobs:
 python scrape_jobs.py --inspect "https://my.hiredly.com/jobs?state=Selangor" --browser --scroll 5
 ```
 
-The Hiredly preset already does this: it opens only the **listing** pages in a
-hidden browser and scrolls 8 times (`--scroll` changes that). Job pages are
-plain HTML, so they still use the fast HTTP fetcher. Add `--browser` to render
-every page in the browser instead.
+The `hiredly-listing` preset works this way: it opens only the **listing**
+pages in a hidden browser and scrolls 8 times (`--scroll` changes that). Job
+pages are plain HTML, so they still use the fast HTTP fetcher. Add `--browser`
+to render every page in the browser instead.
+
+### Sitemaps: the best route when a site has one
+
+Many sites list every page in a sitemap for search engines. Check the
+`Sitemap:` line in `https://<site>/robots.txt`. The `hiredly` preset reads
+`sitemap-jobs.xml` (~7,600 jobs, all of Malaysia), with no browser and no
+scrolling. It fetches job pages one at a time and **stops once `--max-jobs`
+unique, open, Selangor jobs are kept**. `--max-fetch` caps how many pages it
+may read (default 5× `--max-jobs`). A preset needs only these two settings:
+
+```python
+"mysite": {"source": "My Site", "sitemap": "https://mysite.my/sitemap-jobs.xml",
+           "start_urls": ["https://mysite.my/sitemap-jobs.xml"], "link_pattern": r"/job/[^/]+$"},
+```
 
 ## How it works (for the methodology chapter)
 
 | Step | What happens | Code |
 |---|---|---|
-| Crawl | A Scrapling `Spider` walks listing pages ("Next" links, `?page=N`, or scrolling in a headless browser for JavaScript sites) and follows links matching the job-page pattern. It stops paging when a page brings no new jobs. | `scrape_jobs.py` |
-| Extract | Reads the schema.org **JobPosting JSON-LD** that job portals publish for Google for Jobs. Falls back to page title and text when it is missing. | `find_job_postings`, `fallback_job` |
+| Crawl | A Scrapling `Spider` reads the site's job sitemap, or walks listing pages ("Next" links, `?page=N`, or scrolling in a headless browser for JavaScript sites), and follows links matching the job-page pattern. Sitemap mode stops once enough Selangor jobs are kept. | `scrape_jobs.py` |
+| Extract | Reads the schema.org **JobPosting JSON-LD** that job portals publish for Google for Jobs. If a portal cuts that description short (Hiredly does), it uses the page's own "Job Description" section instead, without menus or footers. Salary shown on the page fills in when the JSON-LD has none. Falls back to page title and text when there is no JSON-LD. | `find_job_postings`, `job_section`, `salary_from_text`, `fallback_job` |
 | Clean | Strips HTML, converts salary to RM per month, maps employment type. | `html_to_text`, `parse_salary` |
 | Integrate | Maps the town to a **JKM district** (e.g. Bangi → Hulu Langat, Cyberjaya → Sepang), so it lines up with the JKM OKU data. Keeps Selangor jobs only. | `district_from_location` |
 | Skill extraction | Matches about 100 skills (English and Malay synonyms, e.g. *khidmat pelanggan* → customer service) against the title, requirements and description. | `extract_skills`, `skills_vocab.py` |
-| Industry | Uses the posting's own industry field, otherwise keyword voting. | `classify_industry` |
+| Industry | Uses the posting's own industry field, then keywords in the job title and employer, then the description. | `classify_job_industry` |
 | OKU accommodations | Flags OKU/PWD-friendly wording: wheelchair access, sign language, screen readers, remote work, job coach. | `detect_accommodations` |
-| De-duplicate | Same title + employer + district = one posting. | `dedupe_key`, `combine.py` |
+| De-duplicate | Same title + employer + district = one posting (portals often repost the same job). Postings past their closing date (`validThrough`) are dropped. | `dedupe_key`, `keep`, `combine.py` |
 
 The skill names in `skills_vocab.py` are the same strings used in job-seeker
 profiles. That lets the TF-IDF matcher and skill-gap analysis link them up, so
@@ -91,9 +107,13 @@ These are built into the code. Mention them in the report:
 - **Data minimisation (PDPA 2010):** only job-advert fields are stored. No
   recruiter names, emails or phone numbers.
 - **Terms of use:** read each portal's terms before scraping. Jobstreet and
-  LinkedIn forbid scraping, so they are not included. For the government
-  source, MYFutureJobs (PERKESO) is the best fit for this project; consider
-  asking PERKESO for a data extract instead of scraping.
+  LinkedIn forbid scraping, so they are not included.
+- **MYFutureJobs (PERKESO)** is not included. Its job search
+  (`candidates.myfuturejobs.gov.my`) is a logged-in style web app. Its
+  robots.txt blocks AI crawlers by name and signals that content is not for
+  AI training. The right route is a **formal data request to PERKESO**: it
+  fits the proposal (PERKESO is already a named data source) and avoids
+  scraping a government portal.
 - Data is used for academic, non-commercial research only.
 
 ## Tests

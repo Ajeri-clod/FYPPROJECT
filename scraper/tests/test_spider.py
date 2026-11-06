@@ -113,3 +113,36 @@ def test_javascript_listing_with_infinite_scroll(site, tmp_path):
     titles = {dict(i)["title"] for i in result.items}
     # Without the browser no links exist; without scrolling only the first appears.
     assert titles == {"Customer Service Executive", "Warehouse Packer"}
+
+
+SITEMAP = """<?xml version="1.0"?><urlset>
+<url><loc>{site}/job/1-customer-service</loc></url>
+<url><loc>{site}/job/1b-customer-service-repost</loc></url>
+<url><loc>{site}/job/3-barista</loc></url>
+<url><loc>{site}/job/2-packer</loc></url>
+<url><loc>{site}/job/4-kerani</loc></url>
+<url><loc>{site}/about</loc></url>
+</urlset>"""
+
+
+def test_sitemap_mode_stops_after_enough_unique_selangor_jobs(site, tmp_path):
+    root = tmp_path / "site"
+    shutil.copy(FIX / "job_jsonld.html", root / "job" / "1b-customer-service-repost")
+    (root / "sitemap.xml").write_text(SITEMAP.format(site=site))
+    args = argparse.Namespace(
+        max_jobs=2, max_pages=5, delay=0.1, browser=False, all_locations=False, scroll=None,
+        max_fetch=None,
+    )
+    preset = {
+        "source": "Test",
+        "sitemap": f"{site}/sitemap.xml",
+        "start_urls": [f"{site}/sitemap.xml"],
+        "link_pattern": r"/job/[^/]+$",
+    }
+    spider = scrape_jobs.build_spider(args, preset)()
+    result = spider.start()
+    kept = {r["title"] for r in (dict(i) for i in result.items) if scrape_jobs.keep(r, True)}
+    # The repost of job 1 and the Kuala Lumpur barista do not count towards the 2.
+    assert kept == {"Customer Service Executive", "Warehouse Packer"}
+    fetched = {dict(i)["url"].rsplit("/", 1)[1] for i in result.items}
+    assert "4-kerani" not in fetched  # stopped once 2 unique Selangor jobs were kept
