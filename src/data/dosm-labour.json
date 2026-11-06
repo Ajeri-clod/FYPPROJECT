@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "source": "Department of Statistics Malaysia (DOSM) via data.gov.my \u2014 Labour Force Survey by district; formal sector wages by state",
+    "license": "Open data (data.gov.my)",
+    "lfsYear": "2024",
+    "wagesMonth": "2026-06",
+    "downloadedOn": "2026-11-06"
+  },
+  "districts": [
+    {
+      "name": "Gombak",
+      "workingAgeThousands": 697.1,
+      "employedThousands": 511.6,
+      "employmentRate": 73.4,
+      "unemploymentRate": 3.0,
+      "participationRate": 75.7
+    },
+    {
+      "name": "Klang",
+      "workingAgeThousands": 840.1,
+      "employedThousands": 657.0,
+      "employmentRate": 78.2,
+      "unemploymentRate": 2.6,
+      "participationRate": 80.3
+    },
+    {
+      "name": "Kuala Langat",
+      "workingAgeThousands": 225.8,
+      "employedThousands": 166.9,
+      "employmentRate": 73.9,
+      "unemploymentRate": 1.2,
+      "participationRate": 74.8
+    },
+    {
+      "name": "Kuala Selangor",
+      "workingAgeThousands": 208.6,
+      "employedThousands": 143.6,
+      "employmentRate": 68.8,
+      "unemploymentRate": 2.6,
+      "participationRate": 70.6
+    },
+    {
+      "name": "Petaling",
+      "workingAgeThousands": 1697.9,
+      "employedThousands": 1326.6,
+      "employmentRate": 78.1,
+      "unemploymentRate": 2.0,
+      "participationRate": 79.8
+    },
+    {
+      "name": "Sabak Bernam",
+      "workingAgeThousands": 76.3,
+      "employedThousands": 53.4,
+      "employmentRate": 70.0,
+      "unemploymentRate": 1.9,
+      "participationRate": 71.4
+    },
+    {
+      "name": "Sepang",
+      "workingAgeThousands": 243.2,
+      "employedThousands": 181.8,
+      "employmentRate": 74.8,
+      "unemploymentRate": 2.5,
+      "participationRate": 76.7
+    },
+    {
+      "name": "Hulu Langat",
+      "workingAgeThousands": 1071.8,
+      "employedThousands": 810.9,
+      "employmentRate": 75.7,
+      "unemploymentRate": 2.3,
+      "participationRate": 77.4
+    },
+    {
+      "name": "Hulu Selangor",
+      "workingAgeThousands": 180.5,
+      "employedThousands": 138.4,
+      "employmentRate": 76.7,
+      "unemploymentRate": 1.4,
+      "participationRate": 77.8
+    }
+  ],
+  "selangorMedianWage": 3245,
+  "wageTrend": [
+    {
+      "name": "2025-07",
+      "median": 3127
+    },
+    {
+      "name": "2025-08",
+      "median": 3100
+    },
+    {
+      "name": "2025-09",
+      "median": 3127
+    },
+    {
+      "name": "2025-10",
+      "median": 3145
+    },
+    {
+      "name": "2025-11",
+      "median": 3145
+    },
+    {
+      "name": "2025-12",
+      "median": 3400
+    },
+    {
+      "name": "2026-01",
+      "median": 3427
+    },
+    {
+      "name": "2026-02",
+      "median": 3382
+    },
+    {
+      "name": "2026-03",
+      "median": 3445
+    },
+    {
+      "name": "2026-04",
+      "median": 3282
+    },
+    {
+      "name": "2026-05",
+      "median": 3200
+    },
+    {
+      "name": "2026-06",
+      "median": 3245
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
+import dosmLabour from "@/data/dosm-labour.json";
 import okuStats from "@/data/oku-stats.json";
 import { requireUser } from "@/lib/require-user";
+import type { DosmLabour } from "./compare";
 import type { OkuAggregate, OkuStats } from "./types";
 
 const stats = okuStats as OkuStats;
@@ -19,6 +21,7 @@ export const getOkuOverview = createServerFn({ method: "GET" }).handler(
       districts: stats.districts,
       all: stats.all,
       districtSummary: stats.districtSummary,
+      labour: dosmLabour as DosmLabour,
     };
   },
 );

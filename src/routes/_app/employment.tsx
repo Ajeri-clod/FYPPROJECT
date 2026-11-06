@@ -12,6 +12,7 @@ import { DistrictSelect } from "@/components/oku/DistrictSelect";
 import { PageHeader } from "@/components/oku/PageHeader";
 import { RankedBars } from "@/components/oku/RankedBars";
 import { SourceNote } from "@/components/oku/SourceNote";
+import { compareWithPopulation } from "@/features/oku-stats/compare";
 import {
   okuAggregateQuery,
   okuOverviewQuery,
@@ -64,6 +65,12 @@ function EmploymentPage() {
   const byDistrict = [...overview.districtSummary].sort(
     (a, b) => b.rate - a.rate,
   );
+  const { labour } = overview;
+  const comparison = compareWithPopulation(overview.districtSummary, labour);
+  const populationRate =
+    (labour.districts.reduce((s, d) => s + d.employedThousands, 0) /
+      labour.districts.reduce((s, d) => s + d.workingAgeThousands, 0)) *
+    100;
 
   return (
     <div className="flex flex-col gap-6">
@@ -192,8 +199,39 @@ function EmploymentPage() {
         </ChartCard>
       </div>
 
+      <ChartCard
+        title={`OKU vs all working-age residents — employment rate by district (DOSM ${labour.meta.lfsYear})`}
+        action={
+          <span className="text-xs text-muted-foreground">
+            Selangor: OKU {formatPercent(selangorRate)} vs everyone{" "}
+            {formatPercent(populationRate)}
+          </span>
+        }
+      >
+        <BarChart
+          data={comparison}
+          xKey="district"
+          bars={[
+            { key: "population", label: "All working-age residents (%)" },
+            { key: "oku", label: "Registered OKU (%)" },
+          ]}
+          forceBars
+          showLegend
+          height={300}
+        />
+        <p className="mt-3 text-xs text-muted-foreground">
+          Widest gap: {comparison[0]?.district} ({comparison[0]?.gap} pts). DOSM
+          reports Petaling Jaya, Subang Jaya and Shah Alam together as Petaling.
+          Selangor median formal-sector wage: RM{" "}
+          {formatNumber(labour.selangorMedianWage)} ({labour.meta.wagesMonth}).
+        </p>
+      </ChartCard>
+
       <SourceNote>
-        {overview.meta.source}. Employed = private sector, government or
+        {overview.meta.source}. Population figures: {labour.meta.source} (
+        {labour.meta.license}), employment rate computed as employed ÷
+        working-age (15–64) population. Registry and survey differ in method, so
+        treat the gap as indicative. Employed = private sector, government or
         self-employed. Occupation groups follow the JKM form (MASCO major groups
         and civil-service schemes).
       </SourceNote>

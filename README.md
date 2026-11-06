@@ -51,6 +51,18 @@ Re-run it whenever JKM sends a newer extract. It translates the Malay labels
 employment rates for working-age OKU (15–64; employed = private sector,
 government or self-employed).
 
+### DOSM labour-force statistics → `src/data/dosm-labour.json`
+
+Official figures from the data.gov.my open-data API (no scraping, no key):
+the Labour Force Survey by district, and Selangor's median formal-sector wage.
+Employment Statistics uses them to compare OKU employment with all working-age
+residents of each district. Refresh after DOSM's yearly update (next due 31 Dec
+2026):
+
+```bash
+python3 scripts/build_labour_stats.py
+```
+
 ### Job postings → scraped with `scraper/`
 
 The Labour Market, Recommendations and Skill-Gap modules use job postings. Out
