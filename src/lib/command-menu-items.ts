@@ -8,6 +8,7 @@ import {
   MoonIcon,
   PuzzlePieceIcon,
   SignOutIcon,
+  UserCheckIcon,
   UserIcon,
 } from "@phosphor-icons/react";
 import type { ComponentType } from "react";
@@ -58,6 +59,13 @@ export const commandMenuGroups: CommandMenuGroupConfig[] = [
         description: "Employment rates of working-age OKU",
         icon: BriefcaseIcon,
         href: "/employment",
+      },
+      {
+        key: "placements",
+        label: "OKU Job Placements",
+        description: "PERKESO placements by sector, job and salary",
+        icon: UserCheckIcon,
+        href: "/placements",
       },
       {
         key: "labour-market",

@@ -11,7 +11,8 @@ proposal:
 | --- | --- | --- |
 | Overview | `/` | JKM registry (real, aggregated) |
 | OKU Profiles | `/profiles?district=` | JKM registry (real, aggregated) |
-| Employment Statistics | `/employment?district=` | JKM registry (real, aggregated) |
+| Employment Statistics | `/employment?district=` | JKM registry (real, aggregated) + DOSM labour force |
+| OKU Job Placements | `/placements?year=&programme=` | PERKESO placement statistics (real, aggregated) |
 | Labour Market Insights | `/labour-market` | Job postings (sample) |
 | Job Postings (CRUD) | `/jobs` | Job postings (sample) |
 | Job Recommendations | `/recommendations?candidate=` | TF-IDF + cosine similarity over postings |
@@ -50,6 +51,23 @@ Re-run it whenever JKM sends a newer extract. It translates the Malay labels
 (e.g. `PEMBELAJARAN` → Learning, `PEKERJA SWASTA` → Private sector) and computes
 employment rates for working-age OKU (15–64; employed = private sector,
 government or self-employed).
+
+### PERKESO OKU job placements → `src/data/perkeso-placements.json`
+
+Aggregate statistics from a PERKESO data request (via UPEN Selangor): OKU
+placed into jobs in Selangor, 2021–2025. They are split by programme
+(MYFutureJobs, Disability Management) and broken down by sector, job type
+(MASCO) and salary band, plus OKU career-fair attendance. They drive the
+**OKU Job Placements** page. The file has counts only, so the JSON is
+committed; the original spreadsheet is git-ignored. Rebuild with:
+
+```bash
+python3 scripts/build_perkeso_stats.py path/to/STATISTICS_REQUEST_UPEN_SELANGOR_OKU_DM_AARON_1.xlsx
+```
+
+The request also asked for the labour force participation rate, district of
+placement, 12-month retention and number of employers hiring OKU. PERKESO left
+those blank, so they are worth a follow-up request.
 
 ### DOSM labour-force statistics → `src/data/dosm-labour.json`
 

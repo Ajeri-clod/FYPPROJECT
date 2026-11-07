@@ -9,6 +9,7 @@ import {
   ListChecksIcon,
   MagicWandIcon,
   PuzzlePieceIcon,
+  UserCheckIcon,
 } from "@phosphor-icons/react";
 
 export interface MenuItem {
@@ -38,6 +39,11 @@ export const mainMenuItems: MenuGroup[] = [
         label: "Employment Statistics",
         href: "/employment",
         icon: BriefcaseIcon,
+      },
+      {
+        label: "OKU Job Placements",
+        href: "/placements",
+        icon: UserCheckIcon,
       },
     ],
   },

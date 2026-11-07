@@ -1,0 +1,300 @@
+{
+  "meta": {
+    "source": "PERKESO — statistics request via UPEN Selangor: OKU job placements in Selangor, 2021–2025",
+    "builtOn": "2026-11-07",
+    "programmes": {
+      "mfj": "MYFutureJobs (OKU job-seekers)",
+      "dm": "Disability Management (Return-to-Work)",
+      "total": "All PERKESO OKU placements"
+    },
+    "notProvided": [
+      "Labour force participation rate",
+      "District of placement",
+      "12-month job retention rate",
+      "Number of employers hiring OKU"
+    ]
+  },
+  "years": [2021, 2022, 2023, 2024, 2025],
+  "placements": {
+    "mfj": [236, 483, 430, 614, 435],
+    "dm": [1391, 2603, 2271, 3422, 2877],
+    "total": [1627, 3086, 2701, 4036, 3312]
+  },
+  "sector": {
+    "items": [
+      {
+        "name": "Agriculture, forestry & fishing",
+        "mfj": [1, 0, 2, 1, 0],
+        "dm": [10, 8, 6, 11, 14],
+        "total": [11, 8, 8, 12, 14]
+      },
+      {
+        "name": "Mining & quarrying",
+        "mfj": [0, 0, 0, 1, 0],
+        "dm": [3, 5, 1, 3, 4],
+        "total": [3, 5, 1, 4, 4]
+      },
+      {
+        "name": "Manufacturing",
+        "mfj": [31, 71, 56, 106, 90],
+        "dm": [121, 216, 208, 265, 251],
+        "total": [152, 287, 264, 371, 341]
+      },
+      {
+        "name": "Electricity, gas & air-con supply",
+        "mfj": [3, 3, 0, 5, 1],
+        "dm": [7, 9, 12, 26, 13],
+        "total": [10, 12, 12, 31, 14]
+      },
+      {
+        "name": "Water supply & waste management",
+        "mfj": [0, 2, 1, 8, 0],
+        "dm": [2, 2, 5, 17, 9],
+        "total": [2, 4, 6, 25, 9]
+      },
+      {
+        "name": "Construction",
+        "mfj": [11, 13, 8, 20, 11],
+        "dm": [39, 57, 54, 97, 100],
+        "total": [50, 70, 62, 117, 111]
+      },
+      {
+        "name": "Wholesale & retail trade, vehicle repair",
+        "mfj": [67, 52, 96, 70, 112],
+        "dm": [66, 136, 140, 210, 165],
+        "total": [133, 188, 236, 280, 277]
+      },
+      {
+        "name": "Transport & storage",
+        "mfj": [15, 16, 26, 35, 23],
+        "dm": [58, 108, 103, 176, 165],
+        "total": [73, 124, 129, 211, 188]
+      },
+      {
+        "name": "Accommodation & food services",
+        "mfj": [13, 25, 45, 39, 43],
+        "dm": [18, 20, 22, 38, 31],
+        "total": [31, 45, 67, 77, 74]
+      },
+      {
+        "name": "Information & communication",
+        "mfj": [13, 22, 16, 17, 7],
+        "dm": [14, 24, 17, 20, 40],
+        "total": [27, 46, 33, 37, 47]
+      },
+      {
+        "name": "Finance & insurance/takaful",
+        "mfj": [5, 3, 6, 19, 6],
+        "dm": [14, 17, 26, 72, 62],
+        "total": [19, 20, 32, 91, 68]
+      },
+      {
+        "name": "Real estate",
+        "mfj": [0, 1, 3, 7, 1],
+        "dm": [4, 7, 12, 21, 19],
+        "total": [4, 8, 15, 28, 20]
+      },
+      {
+        "name": "Professional, scientific & technical",
+        "mfj": [12, 29, 22, 24, 19],
+        "dm": [28, 54, 50, 73, 89],
+        "total": [40, 83, 72, 97, 108]
+      },
+      {
+        "name": "Administrative & support services",
+        "mfj": [13, 17, 33, 50, 26],
+        "dm": [25, 32, 30, 52, 51],
+        "total": [38, 49, 63, 102, 77]
+      },
+      {
+        "name": "Public administration & defence",
+        "mfj": [8, 23, 27, 29, 18],
+        "dm": [27, 45, 42, 89, 70],
+        "total": [35, 68, 69, 118, 88]
+      },
+      {
+        "name": "Education",
+        "mfj": [11, 14, 7, 12, 7],
+        "dm": [4, 11, 18, 22, 15],
+        "total": [15, 25, 25, 34, 22]
+      },
+      {
+        "name": "Health & social work",
+        "mfj": [4, 2, 5, 19, 15],
+        "dm": [7, 9, 15, 22, 21],
+        "total": [11, 11, 20, 41, 36]
+      },
+      {
+        "name": "Arts, entertainment & recreation",
+        "mfj": [1, 1, 0, 1, 4],
+        "dm": [4, 4, 6, 8, 9],
+        "total": [5, 5, 6, 9, 13]
+      },
+      {
+        "name": "Other service activities",
+        "mfj": [13, 44, 75, 80, 49],
+        "dm": [32, 62, 64, 98, 80],
+        "total": [45, 106, 139, 178, 129]
+      },
+      {
+        "name": "Households as employers",
+        "mfj": [2, 2, 1, 1, 2],
+        "dm": [1, 2, 4, 3, 3],
+        "total": [3, 4, 5, 4, 5]
+      },
+      {
+        "name": "Extraterritorial organisations",
+        "mfj": [0, 0, 1, 0, 1],
+        "dm": [2, 6, 1, 4, 3],
+        "total": [2, 6, 2, 4, 4]
+      }
+    ],
+    "underReview": {
+      "mfj": [13, 143, 0, 70, 0],
+      "dm": [905, 1769, 1435, 2095, 1663],
+      "total": [918, 1912, 1435, 2165, 1663]
+    }
+  },
+  "occupation": {
+    "items": [
+      {
+        "name": "Managers",
+        "mfj": [15, 13, 12, 44, 25],
+        "dm": [0, 4, 1, 2, 0],
+        "total": [15, 17, 13, 46, 25]
+      },
+      {
+        "name": "Professionals",
+        "mfj": [35, 62, 60, 86, 62],
+        "dm": [3, 4, 13, 6, 2],
+        "total": [38, 66, 73, 92, 64]
+      },
+      {
+        "name": "Technicians & associate professionals",
+        "mfj": [40, 115, 48, 88, 47],
+        "dm": [5, 3, 7, 10, 7],
+        "total": [45, 118, 55, 98, 54]
+      },
+      {
+        "name": "Clerical support workers",
+        "mfj": [30, 45, 70, 121, 74],
+        "dm": [3, 5, 1, 8, 5],
+        "total": [33, 50, 71, 129, 79]
+      },
+      {
+        "name": "Service & sales workers",
+        "mfj": [63, 143, 100, 134, 78],
+        "dm": [4, 16, 19, 1, 7],
+        "total": [67, 159, 119, 135, 85]
+      },
+      {
+        "name": "Skilled agricultural & fishery workers",
+        "mfj": [0, 6, 1, 9, 3],
+        "dm": [0, 0, 1, 0, 0],
+        "total": [0, 6, 2, 9, 3]
+      },
+      {
+        "name": "Craft & related trades workers",
+        "mfj": [7, 12, 24, 13, 20],
+        "dm": [0, 0, 0, 1, 2],
+        "total": [7, 12, 24, 14, 22]
+      },
+      {
+        "name": "Plant & machine operators",
+        "mfj": [22, 32, 38, 53, 22],
+        "dm": [2, 3, 4, 0, 2],
+        "total": [24, 35, 42, 53, 24]
+      },
+      {
+        "name": "Elementary occupations",
+        "mfj": [24, 37, 77, 66, 104],
+        "dm": [0, 1, 0, 0, 0],
+        "total": [24, 38, 77, 66, 104]
+      }
+    ],
+    "underReview": {
+      "mfj": [0, 18, 0, 0, 0],
+      "dm": [1374, 2567, 2225, 3394, 2852],
+      "total": [1374, 2585, 2225, 3394, 2852]
+    }
+  },
+  "salary": {
+    "items": [
+      {
+        "name": "< RM 1,500",
+        "mfj": [39, 79, 65, 41, 11],
+        "dm": [226, 235, 39, 114, 43],
+        "total": [265, 314, 104, 155, 54]
+      },
+      {
+        "name": "RM 1,500 – 1,999",
+        "mfj": [101, 125, 212, 289, 208],
+        "dm": [212, 502, 149, 584, 172],
+        "total": [313, 627, 361, 873, 380]
+      },
+      {
+        "name": "RM 2,000 – 2,999",
+        "mfj": [53, 90, 108, 159, 145],
+        "dm": [368, 662, 195, 897, 379],
+        "total": [421, 752, 303, 1056, 524]
+      },
+      {
+        "name": "RM 3,000 – 3,999",
+        "mfj": [16, 31, 25, 46, 48],
+        "dm": [208, 375, 110, 680, 317],
+        "total": [224, 406, 135, 726, 365]
+      },
+      {
+        "name": "RM 4,000 – 4,999",
+        "mfj": [13, 24, 7, 25, 6],
+        "dm": [91, 189, 66, 424, 246],
+        "total": [104, 213, 73, 449, 252]
+      },
+      {
+        "name": "RM 5,000 – 5,999",
+        "mfj": [2, 5, 9, 16, 9],
+        "dm": [48, 107, 40, 303, 156],
+        "total": [50, 112, 49, 319, 165]
+      },
+      {
+        "name": "RM 6,000 – 7,999",
+        "mfj": [2, 2, 4, 5, 6],
+        "dm": [34, 65, 18, 231, 119],
+        "total": [36, 67, 22, 236, 125]
+      },
+      {
+        "name": "RM 8,000 – 9,999",
+        "mfj": [0, 2, 0, 7, 0],
+        "dm": [17, 39, 14, 67, 29],
+        "total": [17, 41, 14, 74, 29]
+      },
+      {
+        "name": "RM 10,000 – 12,999",
+        "mfj": [0, 1, 0, 0, 0],
+        "dm": [10, 17, 7, 49, 34],
+        "total": [10, 18, 7, 49, 34]
+      },
+      {
+        "name": "RM 13,000 – 15,999",
+        "mfj": [0, 0, 0, 2, 1],
+        "dm": [4, 3, 2, 20, 10],
+        "total": [4, 3, 2, 22, 11]
+      },
+      {
+        "name": "> RM 15,999",
+        "mfj": [0, 0, 0, 1, 1],
+        "dm": [5, 9, 7, 24, 8],
+        "total": [5, 9, 7, 25, 9]
+      }
+    ],
+    "underReview": {
+      "mfj": [10, 124, 0, 23, 0],
+      "dm": [168, 400, 1624, 29, 1364],
+      "total": [178, 524, 1624, 52, 1364]
+    }
+  },
+  "support": {
+    "programmes": [null, null, 39, 201, 117],
+    "attendance": [null, null, 1534, 7722, 4653]
+  }
+}
