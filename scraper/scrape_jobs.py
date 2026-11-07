@@ -37,6 +37,7 @@ from extract import (
     is_selangor,
     job_header,
     job_section,
+    listed_accessibility,
     normalise_job,
 )
 
@@ -52,6 +53,17 @@ SITES: dict[str, dict] = {
         "sitemap": "https://my.hiredly.com/sitemap-jobs.xml",
         "start_urls": ["https://my.hiredly.com/sitemap-jobs.xml"],
         "link_pattern": r"/jobs/jobs-malaysia-[^/?#]+$",
+    },
+    "inklusif": {
+        # OKU-focused job board: every job lists its accessibility features.
+        # Beta site (Nov 2026: 43 jobs, newest posted May 2026) - check that the
+        # listings are live before relying on them; --max-age-days filters old ones.
+        "source": "Inklusif",
+        "sitemap": "https://www.inklusif.org/sitemap.xml",
+        "start_urls": ["https://www.inklusif.org/sitemap.xml"],
+        "link_pattern": r"^/jobs/[0-9a-f-]{36}$",
+        # The sitemap lists inklusif.org URLs, which redirect to www.
+        "canonical_host": "www.inklusif.org",
     },
     "hiredly-listing": {
         # Alternative: the Selangor listing page, rendered in a browser and
@@ -105,11 +117,15 @@ _LOC = re.compile(r"<loc>\s*([^<\s]+)\s*</loc>")
 def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
     link_rx = re.compile(preset["link_pattern"])
     domains = {urlparse(u).netloc for u in preset["start_urls"]}
+    if preset.get("canonical_host"):
+        domains.add(preset["canonical_host"])
     source = preset["source"]
     page_param = preset.get("page_param")
     sitemap = preset.get("sitemap")
+    canonical_host = preset.get("canonical_host")
     selangor_only = not getattr(args, "all_locations", False)
     max_fetch = getattr(args, "max_fetch", None) or args.max_jobs * 5
+    max_age = getattr(args, "max_age_days", None)
     listing_browser = args.browser or preset.get("listing_browser", False)
     scroll_times = getattr(args, "scroll", None)
     if scroll_times is None:
@@ -169,6 +185,8 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
                 if loc.endswith(".xml") or loc.endswith(".xml.gz"):
                     yield Request(loc, sid="http", callback=self.parse_sitemap)
                 elif link_rx.search(urlparse(loc).path) and loc not in self.job_links:
+                    if canonical_host:
+                        loc = urlunparse(urlparse(loc)._replace(netloc=canonical_host))
                     self.job_links.add(loc)
                     self.pending.append(loc)
             self.logger.info(f"Sitemap: {len(self.pending)} job URLs queued")
@@ -233,7 +251,7 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
                 )
                 rows = [fallback_job(title, response.get_all_text() or "", "", response.url, source)]
             for row in rows:
-                if keep(row, selangor_only) and dedupe_key(row) not in self.kept_keys:
+                if keep(row, selangor_only, max_age) and dedupe_key(row) not in self.kept_keys:
                     self.kept_keys.add(dedupe_key(row))
                     self.kept += 1
                 yield row
@@ -248,19 +266,28 @@ def build_spider(args: argparse.Namespace, preset: dict) -> type[Spider]:
             jobs = find_job_postings(response.html_content)
             text = (response.get_all_text() or "") if jobs else ""
             section, header = job_section(text), job_header(text)
+            access = listed_accessibility(text)
             for job in jobs:
-                yield normalise_job(job, response.url, source, section, header)
+                yield normalise_job(job, response.url, source, section, header, access)
 
     return JobSpider
 
 
-def keep(row: dict, selangor_only: bool) -> bool:
-    """Has a title, is still open (not past its closing date) and, by default, is in Selangor."""
+def keep(row: dict, selangor_only: bool, max_age_days: int | None = None) -> bool:
+    """Is a real job (title; JSON-LD, or skills found on a plain page), still open
+    (not past its closing date, and not older than max_age_days if given) and,
+    by default, in Selangor."""
     if not row["title"]:
         return False
+    if row.get("parsedFrom") == "html" and not row["skills"]:
+        return False  # e.g. a removed job that now shows the site's home page
     closing = row.get("validThrough") or ""
     if len(closing) == 10 and closing < date.today().isoformat():
         return False
+    posted = row.get("datePosted") or ""
+    if max_age_days is not None and len(posted) == 10:
+        if (date.today() - date.fromisoformat(posted)).days > max_age_days:
+            return False
     return not selangor_only or bool(row["district"] or is_selangor(row["location"]))
 
 
@@ -328,6 +355,7 @@ def main() -> int:
     p.add_argument("--browser", action="store_true", help="render every page in a headless browser (JavaScript sites)")
     p.add_argument("--scroll", type=int, help="times to scroll each browser listing page (infinite-scroll sites)")
     p.add_argument("--all-locations", action="store_true", help="keep jobs outside Selangor too")
+    p.add_argument("--max-age-days", type=int, help="drop postings older than this many days (by datePosted)")
     p.add_argument("--out", default=str(HERE / "output" / "jobs.csv"), help="CSV output path")
     p.add_argument("--inspect", metavar="URL", help="show links and JSON-LD found on one page, then exit")
     args = p.parse_args()
@@ -354,7 +382,7 @@ def main() -> int:
     seen, rows = set(), []
     for item in result.items:
         row = dict(item)
-        if keep(row, not args.all_locations) and dedupe_key(row) not in seen:
+        if keep(row, not args.all_locations, args.max_age_days) and dedupe_key(row) not in seen:
             seen.add(dedupe_key(row))
             rows.append(row)
 

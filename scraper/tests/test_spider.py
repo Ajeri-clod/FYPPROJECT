@@ -146,3 +146,17 @@ def test_sitemap_mode_stops_after_enough_unique_selangor_jobs(site, tmp_path):
     assert kept == {"Customer Service Executive", "Warehouse Packer"}
     fetched = {dict(i)["url"].rsplit("/", 1)[1] for i in result.items}
     assert "4-kerani" not in fetched  # stopped once 2 unique Selangor jobs were kept
+
+
+def test_keep_rules():
+    from datetime import date, timedelta
+
+    base = {"title": "Clerk", "employer": "X", "district": "Klang", "location": "Klang",
+            "skills": "typing", "parsedFrom": "json-ld", "validThrough": "", "datePosted": ""}
+    assert scrape_jobs.keep(base, True)
+    assert not scrape_jobs.keep({**base, "parsedFrom": "html", "skills": ""}, True)
+    assert not scrape_jobs.keep({**base, "validThrough": "2000-01-01"}, True)
+    old = (date.today() - timedelta(days=200)).isoformat()
+    assert scrape_jobs.keep({**base, "datePosted": old}, True)
+    assert not scrape_jobs.keep({**base, "datePosted": old}, True, max_age_days=90)
+    assert not scrape_jobs.keep({**base, "district": "", "location": "Kuala Lumpur"}, True)

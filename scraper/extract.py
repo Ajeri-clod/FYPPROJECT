@@ -99,15 +99,43 @@ def html_to_text(value: str | None) -> str:
 # ------------------------------------------------------- job text section
 _SECTION_START = re.compile(
     r"^\s*(job descriptions?|penerangan kerja|deskripsi kerja|job requirements?|"
-    r"requirements|responsibilities|tanggungjawab|kelayakan|qualifications?)\s*:?\s*$",
+    r"requirements|responsibilities|tanggungjawab|kelayakan|qualifications?|"
+    r"about (?:this|the) (?:role|job|position)|role overview|job summary)\s*:?\s*$",
     re.I | re.M,
 )
 _SECTION_END = re.compile(
     r"^\s*(company benefits|benefits|additional info(?:rmation)?|about (?:the )?company|"
     r"company (?:overview|activity|info)|similar jobs|jobs you might like|report (?:this )?job|"
-    r"manfaat(?: tambahan)?|tentang syarikat|maklumat tambahan|kerja serupa|share this job)\s*:?\s*$",
+    r"manfaat(?: tambahan)?|tentang syarikat|maklumat tambahan|kerja serupa|share this job|"
+    r"browse more jobs|apply now\b[^\n]*|mohon sekarang[^\n]*)\s*:?\s*$",
     re.I | re.M,
 )
+
+
+_ACCESS_LIST = re.compile(
+    r"^\s*(accessibility features|accessibility|accommodations|workplace accommodations|"
+    r"kemudahan oku|kemudahan)\s*:?\s*$",
+    re.I | re.M,
+)
+
+
+def listed_accessibility(page_text: str, max_items: int = 12) -> list[str]:
+    """Items under an 'Accessibility Features' heading (OKU-focused job boards
+    such as Inklusif list them as short lines), up to the next heading."""
+    m = _ACCESS_LIST.search(page_text or "")
+    if not m:
+        return []
+    items = []
+    for line in page_text[m.end():].splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        if _SECTION_START.match(line) or _SECTION_END.match(line) or len(line) > 60:
+            break
+        items.append(line)
+        if len(items) >= max_items:
+            break
+    return items
 
 
 def job_header(page_text: str, limit: int = 1500) -> str:
@@ -214,6 +242,8 @@ def parse_salary(base_salary: Any) -> tuple[int | None, int | None]:
         lo, hi = value.get("minValue"), value.get("maxValue")
         if lo is None and hi is None:
             lo = hi = value.get("value")
+        if lo is None and hi is None and value.get("description"):
+            return salary_from_text(str(value["description"]))
     else:
         lo = hi = value
     factor = _PER_MONTH.get(unit, 1)
@@ -335,8 +365,21 @@ _ACCOMMODATION_TERMS = {
     "Remote / work from home": r"\b(work from home|wfh|remote work|fully remote|hybrid)\b",
     "Flexible hours": r"\bflexible (?:working )?hours\b|\bflexi[- ]?hours\b",
     "Job coach support": r"\bjob coach",
+    "Ergonomic equipment": r"\bergonomic",
+    "Accessible transport / parking": r"\baccessible (?:transport|parking)|\bdisabled parking",
 }
 _ACCOMMODATION_RX = {k: re.compile(v, re.I) for k, v in _ACCOMMODATION_TERMS.items()}
+
+
+def merge_accommodations(listed: list[str], detected: str) -> str:
+    """The site's own accessibility list first, then detected ones not already covered."""
+    out = list(listed)
+    seen = " ".join(listed).lower()
+    for item in (d.strip() for d in detected.split(",") if d.strip()):
+        first_word = item.split()[0].lower().strip("/")
+        if first_word not in seen:
+            out.append(item)
+    return ", ".join(out)
 
 
 def detect_accommodations(*texts: str) -> str:
@@ -353,7 +396,12 @@ FIELDS = [
 
 
 def normalise_job(
-    job: dict, url: str, source: str, page_section: str = "", page_header: str = ""
+    job: dict,
+    url: str,
+    source: str,
+    page_section: str = "",
+    page_header: str = "",
+    listed_access: list[str] | None = None,
 ) -> dict:
     """schema.org JobPosting -> one dashboard row.
 
@@ -387,7 +435,9 @@ def normalise_job(
         "employmentType": employment_type(job.get("employmentType")),
         "skills": ", ".join(extract_skills(title, explicit, description)),
         "description": description[:2000],
-        "accommodations": detect_accommodations(description, explicit),
+        "accommodations": merge_accommodations(
+            listed_access or [], detect_accommodations(description, explicit)
+        ),
         "salaryMin": salary_min,
         "salaryMax": salary_max,
         "status": "open",

@@ -128,3 +128,47 @@ def test_industry_prefers_title_over_description():
     assert e.classify_job_industry(
         "Chief Financial Officer", "Baba Eco Group", "We run a warehouse and delivery fleet."
     ) == "Finance & Insurance"
+
+
+INKLUSIF_PAGE = """Browse Jobs
+Operations Analyst
+Acme Sdn Bhd
+Petaling Jaya, Selangor
+Full Time
+RM 4,000 – RM 5,500 / month
+Accessibility Features
+Remote Friendly
+Flexible Hours
+Screen Reader Compatible
+Ergonomic Equipment
+About this Role
+Analyse partner data and present insights.
+Experience with Excel or SQL
+Good presentation skills
+Apply Now — Create Profile
+Browse More Jobs
+"""
+
+
+def test_oku_board_accessibility_list_section_and_text_salary():
+    job = {
+        "@type": "JobPosting",
+        "title": "Operations Analyst",
+        "hiringOrganization": {"name": "Acme Sdn Bhd"},
+        "description": "Analyse partner data.",
+        "jobLocation": {"address": {"addressLocality": "Petaling Jaya, Selangor"}},
+        "baseSalary": {"value": {"@type": "QuantitativeValue", "description": "RM 4,000 – RM 5,500 / month"}},
+    }
+    row = e.normalise_job(
+        job, "u", "Inklusif",
+        e.job_section(INKLUSIF_PAGE), e.job_header(INKLUSIF_PAGE),
+        e.listed_accessibility(INKLUSIF_PAGE),
+    )
+    assert (row["salaryMin"], row["salaryMax"]) == (4000, 5500)
+    assert row["accommodations"].startswith(
+        "Remote Friendly, Flexible Hours, Screen Reader Compatible, Ergonomic Equipment"
+    )
+    assert "Remote / work from home" not in row["accommodations"]  # already listed
+    assert {"Microsoft Excel", "SQL", "presentation"} <= set(row["skills"].split(", "))
+    assert "Apply Now" not in row["description"]
+    assert row["district"] == "Petaling Jaya"

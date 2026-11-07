@@ -10,7 +10,7 @@ portals" data source in Research Objective 1 of the proposal.
    `winget install Python.Python.3.12`
 2. Double-click **`scrape-jobs.bat`** in the project folder. It:
    - sets up the scraper the first time (`scraper\.venv`);
-   - scrapes Hiredly and Maukerja, keeping 100 Selangor jobs from each by default;
+   - scrapes Hiredly, Maukerja and Inklusif, keeping up to 100 Selangor jobs from each by default;
    - merges them into `scraper\output\jobs.csv`;
    - loads them into the dashboard (`bun run import-jobs`).
 3. Restart the dashboard (`start-dashboard.bat`). The "Sample data" badges
@@ -29,7 +29,8 @@ pip install -r requirements.txt
 
 python scrape_jobs.py --site hiredly --max-jobs 100
 python scrape_jobs.py --site maukerja --max-jobs 100 --out output/maukerja.csv
-python combine.py output/jobs.csv output/hiredly.csv output/maukerja.csv
+python scrape_jobs.py --site inklusif --out output/inklusif.csv
+python combine.py output/jobs.csv output/hiredly.csv output/maukerja.csv output/inklusif.csv
 cd .. && bun run import-jobs scraper/output/jobs.csv
 ```
 
@@ -64,6 +65,17 @@ The `hiredly-listing` preset works this way: it opens only the **listing**
 pages in a hidden browser and scrolls 8 times (`--scroll` changes that). Job
 pages are plain HTML, so they still use the fast HTTP fetcher. Add `--browser`
 to render every page in the browser instead.
+
+### Sources
+
+| Preset | Site | How | Notes |
+|---|---|---|---|
+| `hiredly` | my.hiredly.com | job sitemap (~7,600 jobs, all Malaysia) | Selangor filtered after fetching |
+| `maukerja` | maukerja.my | Selangor listing pages | |
+| `inklusif` | inklusif.org | sitemap (43 jobs, Nov 2026) | **OKU-focused**: each job lists accessibility features (screen reader, wheelchair access, sign language, …). Beta site; newest posting is May 2026, so check the listings are live, or use `--max-age-days 90`. |
+| `hiredly-listing` | my.hiredly.com | browser + scrolling | fallback, fewer jobs |
+
+`--max-age-days N` drops postings older than N days (by `datePosted`).
 
 ### Sitemaps: the best route when a site has one
 
@@ -108,6 +120,11 @@ These are built into the code. Mention them in the report:
   recruiter names, emails or phone numbers.
 - **Terms of use:** read each portal's terms before scraping. Jobstreet and
   LinkedIn forbid scraping, so they are not included.
+- **RiceBowl** (`ricebowl.my/jobsearch/oku-jobs`) is not included. Its
+  robots.txt blocks Anthropic's crawler (`ClaudeBot`) completely, so it was
+  not examined while building this scraper. It also disallows `/jobs/` and
+  `/search/` for all crawlers. If you want its OKU listings, ask RiceBowl
+  (or Maukerja, which runs the same platform) for a data export.
 - **MYFutureJobs (PERKESO)** is not included. Its job search
   (`candidates.myfuturejobs.gov.my`) is a logged-in style web app. Its
   robots.txt blocks AI crawlers by name and signals that content is not for
