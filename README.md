@@ -25,6 +25,14 @@ packages, then starts the server and opens http://localhost:3000. Click
 **Dev quick login**. Needs [Node.js](https://nodejs.org) (LTS). Keep the window
 open while you use the dashboard.
 
+**Share a temporary link** (e.g. for a supervisor to try it on her own
+device): double-click `share-dashboard.bat`. It starts the dashboard and opens
+a free Cloudflare quick tunnel, then prints a link like
+`https://some-words.trycloudflare.com`. The link works only while both windows
+stay open and the PC is awake, and it changes every run. Anyone with the link
+can open the dashboard through **Dev quick login**, so share it only with the
+people who need it. The dashboard shows aggregated statistics only.
+
 **Command line:**
 
 ```bash

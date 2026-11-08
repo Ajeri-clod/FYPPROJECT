@@ -9,6 +9,9 @@ import viteTsConfigPaths from "vite-tsconfig-paths";
 export default defineConfig({
   server: {
     port: 3000,
+    // Let a temporary share link (share-dashboard.bat: Cloudflare quick
+    // tunnel) reach the dev server, e.g. https://xyz.trycloudflare.com.
+    allowedHosts: [".trycloudflare.com"],
   },
   plugins: [
     viteTsConfigPaths({ projects: ["./tsconfig.json"] }),

@@ -64,3 +64,6 @@ scraper/output/
 scraper/.scrapling_cache/
 __pycache__/
 .pytest_cache/
+
+# downloaded by share-dashboard.bat
+/tools/
