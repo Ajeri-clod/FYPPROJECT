@@ -24,9 +24,14 @@ if errorlevel 1 (
   set CLOUDFLARED=tools\cloudflared.exe
   if not exist "tools\cloudflared.exe" (
     echo Downloading Cloudflare's tunnel tool - first run only, about 60 MB...
-    curl -L --fail -o tools\cloudflared.exe https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
+    curl -L --fail --retry 4 --retry-delay 5 --retry-all-errors -o tools\cloudflared.exe https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
     if errorlevel 1 (
-      echo [ERROR] Download failed. Alternative: winget install --id Cloudflare.cloudflared
+      if exist tools\cloudflared.exe del tools\cloudflared.exe
+      echo.
+      echo [ERROR] Download failed ^(GitHub may be busy^). Either run this file again later, or:
+      echo   - open https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
+      echo     in your browser, rename the file to cloudflared.exe and put it in the tools folder, or
+      echo   - run:  winget install --id Cloudflare.cloudflared   then reopen this file.
       goto :end
     )
   )
