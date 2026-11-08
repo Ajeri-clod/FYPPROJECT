@@ -4,11 +4,11 @@
  *   bun run import-jobs scraper/output/jobs.csv
  *
  * Validates every row against the job-posting schema and writes
- * src/data/jobs-imported.json. When that file has rows, the Job Postings list
+ * src/data/jobs-imported.json (git-ignored). When it has rows, the Job Postings list
  * (and Labour Market Insights, Recommendations, Skill-Gap) use them instead of
  * the sample postings. Run with `--clear` to go back to the sample data.
  */
-import { readFileSync, writeFileSync } from "node:fs";
+import { existsSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { industries, jobInputSchema } from "../src/features/jobs/schema";
 
@@ -60,7 +60,7 @@ const toInt = (v: string | undefined) => {
 function main() {
   const arg = process.argv[2];
   if (arg === "--clear") {
-    writeFileSync(OUT, "[]\n");
+    if (existsSync(OUT)) rmSync(OUT);
     console.log(
       "Cleared imported jobs — the dashboard is back on sample data.",
     );

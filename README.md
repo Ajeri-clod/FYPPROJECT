@@ -100,6 +100,10 @@ scraper and then:
 bun run import-jobs scraper/output/jobs.csv
 ```
 
+On Windows, `import-jobs.bat` reloads the last scrape without scraping again.
+The imported file (`src/data/jobs-imported.json`) is git-ignored, so
+downloading a fresh copy of the project never overwrites it.
+
 See [`scraper/README.md`](scraper/README.md) for how the scraper works and its
 responsible-scraping safeguards. Postings can also be added through the
 `/jobs` form.

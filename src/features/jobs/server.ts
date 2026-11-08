@@ -1,6 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
-import importedJobs from "@/data/jobs-imported.json";
 import { type Job, jobs, type NewJob } from "@/db/schema";
 import { drizzleRepository } from "@/infra/data/drizzle-repository";
 import { memoryRepository } from "@/infra/data/memory-repository";
@@ -21,11 +20,19 @@ interface ImportedJob extends Omit<Job, "createdAt" | "updatedAt"> {
 }
 
 /**
- * Seed rows for the in-memory backend: scraped postings loaded with
- * `bun run import-jobs <csv>` when there are any, otherwise the sample postings.
+ * Scraped postings written by `bun run import-jobs <csv>`. The file is
+ * git-ignored (so downloading a fresh copy of the project never wipes it) and
+ * loaded with a glob rather than an import, so the app also builds without it.
  */
-const seedJobs: Job[] = (importedJobs as ImportedJob[]).length
-  ? (importedJobs as ImportedJob[]).map((j) => ({
+const importedFiles = import.meta.glob<ImportedJob[]>(
+  "/src/data/jobs-imported.json",
+  { eager: true, import: "default" },
+);
+const importedJobs: ImportedJob[] = Object.values(importedFiles)[0] ?? [];
+
+/** Seed rows for the in-memory backend: imported postings, else the samples. */
+const seedJobs: Job[] = importedJobs.length
+  ? importedJobs.map((j) => ({
       ...j,
       createdAt: new Date(j.createdAt),
       updatedAt: new Date(j.updatedAt),

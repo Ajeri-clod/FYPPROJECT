@@ -67,3 +67,7 @@ __pycache__/
 
 # downloaded by share-dashboard.bat
 /tools/
+
+# scraped job postings loaded by `bun run import-jobs` (kept out of git so a
+# fresh download of the project never overwrites them)
+src/data/jobs-imported.json
