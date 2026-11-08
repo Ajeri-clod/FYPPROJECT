@@ -28,14 +28,14 @@ if not exist "node_modules\vite\bin\vite.js" (
 
 echo.
 echo Starting the dashboard...
-echo Your browser will open http://localhost:3000 - click "Dev quick login".
+echo Your browser will open http://127.0.0.1:3000 - click "Dev quick login".
 echo To stop the dashboard, close this window or press Ctrl+C.
 echo.
 
 REM Open the browser once the server has had a few seconds to start.
-start "" /b cmd /c "timeout /t 6 /nobreak >nul & start http://localhost:3000"
+start "" /b cmd /c "timeout /t 6 /nobreak >nul & start http://127.0.0.1:3000"
 
-node node_modules\vite\bin\vite.js dev --port 3000
+node node_modules\vite\bin\vite.js dev --host 127.0.0.1 --port 3000 --strictPort
 
 :end
 echo.

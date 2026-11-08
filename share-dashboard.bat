@@ -37,13 +37,36 @@ if errorlevel 1 (
   )
 )
 
-echo Starting the dashboard in a second window (it will say localhost - that is normal)...
-start "OKU dashboard (keep open)" cmd /k node node_modules\vite\bin\vite.js dev --port 3000
-timeout /t 10 /nobreak >nul
+REM Is a dashboard already running? Reuse it rather than starting a second one.
+call :probe
+if "!CODE!"=="200" (
+  echo The dashboard is already running - using it.
+) else (
+  echo Starting the dashboard in a second window ^(it will say 127.0.0.1 - that is normal^)...
+  REM 127.0.0.1, not localhost: on Windows "localhost" can mean IPv6 ::1, which
+  REM the tunnel does not reach ^(Cloudflare then shows "Bad gateway 502"^).
+  start "OKU dashboard (keep open)" cmd /k node node_modules\vite\bin\vite.js dev --host 127.0.0.1 --port 3000 --strictPort
+  echo Waiting for the dashboard to answer - up to 2 minutes...
+  for /l %%i in (1,1,120) do (
+    if not "!CODE!"=="200" (
+      timeout /t 1 /nobreak >nul
+      call :probe
+    )
+  )
+)
+if not "!CODE!"=="200" (
+  echo.
+  echo [ERROR] The dashboard did not start on port 3000. Look at the dashboard window:
+  echo   - "Port 3000 is already in use": close every other dashboard / Command Prompt
+  echo     window ^(or restart the PC^), then run this file again.
+  echo   - any other red error: send me what it says.
+  goto :end
+)
+echo Dashboard is up.
 
 echo Opening the public link - this takes 10-30 seconds...
 if exist tools\tunnel.log del tools\tunnel.log
-start "" /b "%CLOUDFLARED%" tunnel --no-autoupdate --url http://localhost:3000 --logfile tools\tunnel.log >nul 2>&1
+start "" /b "%CLOUDFLARED%" tunnel --no-autoupdate --url http://127.0.0.1:3000 --logfile tools\tunnel.log >nul 2>&1
 
 set URL=
 for /l %%i in (1,1,60) do (
@@ -86,3 +109,10 @@ echo.
 echo Press any key to STOP sharing and close this window...
 pause >nul
 taskkill /im cloudflared.exe /f >nul 2>&1
+exit /b
+
+:probe
+REM Sets CODE to the HTTP status of the dashboard's login page ("000" = not running).
+set CODE=000
+for /f %%c in ('curl -s -o nul -m 5 -w "%%{http_code}" http://127.0.0.1:3000/login 2^>nul') do set CODE=%%c
+exit /b
