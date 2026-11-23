@@ -143,6 +143,7 @@ function RecommendationsPage() {
               <div className="flex items-center gap-2">
                 <Switch
                   id="nearby"
+                  aria-label={`Only jobs in ${candidate.district}`}
                   checked={nearby}
                   onCheckedChange={(checked) =>
                     navigate({ search: (s) => ({ ...s, nearby: checked }) })
@@ -229,7 +230,7 @@ function RecommendationsPage() {
                             </Badge>
                           ) : null}
                         </p>
-                        <h3 className="font-medium">
+                        <h2 className="font-medium">
                           {job.url ? (
                             <a
                               href={job.url}
@@ -242,7 +243,7 @@ function RecommendationsPage() {
                           ) : (
                             job.title
                           )}
-                        </h3>
+                        </h2>
                         <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
                           <span className="flex items-center gap-1">
                             <BuildingsIcon size={12} />
@@ -265,7 +266,11 @@ function RecommendationsPage() {
                         <p className="text-xs text-muted-foreground">
                           match score
                         </p>
-                        <Progress value={score} className="mt-1" />
+                        <Progress
+                          value={score}
+                          aria-label={`Match score for ${job.title}`}
+                          className="mt-1"
+                        />
                       </div>
                     </div>
 
@@ -274,7 +279,7 @@ function RecommendationsPage() {
                         <Badge
                           key={s}
                           variant="outline"
-                          className="border-green-500/40 bg-green-500/10 text-green-700 dark:text-green-400"
+                          className="border-green-500/40 bg-green-500/10 text-green-800 dark:text-green-400"
                         >
                           ✓ {s}
                         </Badge>

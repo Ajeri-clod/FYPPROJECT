@@ -83,7 +83,7 @@ export function createJobColumns(context: JobTableContext): ColumnDef<Job>[] {
     },
     {
       id: "actions",
-      header: "",
+      header: () => <span className="sr-only">Actions</span>,
       enableSorting: false,
       cell: (info) => {
         const row = info.row.original;

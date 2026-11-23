@@ -45,7 +45,9 @@ function LoginPage() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-lg">Sign in</CardTitle>
+        <CardTitle className="text-lg">
+          <h1>Sign in</h1>
+        </CardTitle>
         <CardDescription>
           Welcome back. Enter your credentials to continue.
         </CardDescription>

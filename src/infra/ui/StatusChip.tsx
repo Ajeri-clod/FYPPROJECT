@@ -13,7 +13,7 @@ export type ChipColor =
 
 const colorClasses: Record<ChipColor, string> = {
   success:
-    "border-transparent bg-green-500/15 text-green-700 dark:text-green-400",
+    "border-transparent bg-green-500/15 text-green-800 dark:text-green-400",
   warning:
     "border-transparent bg-amber-500/15 text-amber-700 dark:text-amber-400",
   danger: "border-transparent bg-destructive/15 text-destructive",

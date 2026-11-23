@@ -84,30 +84,37 @@ export function AppSidebar() {
 
   return (
     <Sidebar collapsible="icon">
-      <SidebarHeader className="h-16 justify-center border-b border-sidebar-border">
-        <span className="truncate px-1 text-base font-semibold tracking-tight group-data-[collapsible=icon]:hidden">
-          {appConfig.name}
-        </span>
-      </SidebarHeader>
+      <nav
+        aria-label="Main navigation"
+        className="flex min-h-0 flex-1 flex-col"
+      >
+        <SidebarHeader className="h-16 justify-center border-b border-sidebar-border">
+          <span className="truncate px-1 text-base font-semibold tracking-tight group-data-[collapsible=icon]:hidden">
+            {appConfig.name}
+          </span>
+        </SidebarHeader>
 
-      <SidebarContent>
-        {appConfig.nav.main.map((group, groupIndex) => (
-          <SidebarGroup key={group.groupLabel ?? `group-${groupIndex}`}>
-            {group.groupLabel && (
-              <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>
-            )}
-            <SidebarGroupContent>
-              <SidebarMenu>{group.items.map(renderMenuItem)}</SidebarMenu>
-            </SidebarGroupContent>
-          </SidebarGroup>
-        ))}
-      </SidebarContent>
+        <SidebarContent>
+          {appConfig.nav.main.map((group, groupIndex) => (
+            <SidebarGroup key={group.groupLabel ?? `group-${groupIndex}`}>
+              {group.groupLabel && (
+                <SidebarGroupLabel>{group.groupLabel}</SidebarGroupLabel>
+              )}
+              <SidebarGroupContent>
+                <SidebarMenu>{group.items.map(renderMenuItem)}</SidebarMenu>
+              </SidebarGroupContent>
+            </SidebarGroup>
+          ))}
+        </SidebarContent>
 
-      {appConfig.nav.bottom.length > 0 && (
-        <SidebarFooter className="border-t border-sidebar-border">
-          <SidebarMenu>{appConfig.nav.bottom.map(renderMenuItem)}</SidebarMenu>
-        </SidebarFooter>
-      )}
+        {appConfig.nav.bottom.length > 0 && (
+          <SidebarFooter className="border-t border-sidebar-border">
+            <SidebarMenu>
+              {appConfig.nav.bottom.map(renderMenuItem)}
+            </SidebarMenu>
+          </SidebarFooter>
+        )}
+      </nav>
 
       <SidebarRail />
     </Sidebar>

@@ -23,7 +23,8 @@
     "db:seed": "bun run scripts/seed.ts",
     "create-resource": "bun run scripts/create-resource.ts",
     "import-jobs": "bun run scripts/import-jobs.ts",
-    "evaluate-model": "bun run scripts/evaluate-model.ts"
+    "evaluate-model": "bun run scripts/evaluate-model.ts",
+    "a11y": "node scripts/a11y-audit.cjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",
@@ -70,6 +71,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.2",
+    "axe-core": "4.10.2",
     "dotenv": "^17.2.3",
     "drizzle-kit": "^0.31.8",
     "jsdom": "^29.1.1",
