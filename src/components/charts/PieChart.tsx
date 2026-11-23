@@ -35,6 +35,8 @@ export function PieChart<T>({
     <ResponsiveContainer width="100%" height={height}>
       <RPieChart>
         <Pie
+          animationDuration={300}
+          animationEasing="ease-out"
           data={data}
           cx="50%"
           cy="50%"

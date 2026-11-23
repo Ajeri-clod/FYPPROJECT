@@ -1,3 +1,4 @@
+import type { CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 
 export interface RankedBarItem {
@@ -13,6 +14,8 @@ export interface RankedBarsProps {
   format?: (value: number) => string;
   /** Scale bars against this instead of the largest value (e.g. 100 for %). */
   max?: number;
+  /** Make the largest value stand out and soften the rest (default true). */
+  highlightMax?: boolean;
   className?: string;
 }
 
@@ -24,36 +27,52 @@ export function RankedBars({
   items,
   format = (v) => v.toLocaleString("en-MY"),
   max,
+  highlightMax = true,
   className,
 }: RankedBarsProps) {
-  const scale = max ?? Math.max(1, ...items.map((i) => i.value));
+  const top = Math.max(0, ...items.map((i) => i.value));
+  const scale = max ?? Math.max(1, top);
   return (
     <ul className={cn("flex flex-col gap-2.5", className)}>
-      {items.map((item) => (
-        <li key={item.label} className="flex flex-col gap-1">
-          <div className="flex items-baseline justify-between gap-3 text-sm">
-            <span className="truncate" title={item.label}>
-              {item.label}
-            </span>
-            <span className="shrink-0 tabular-nums text-muted-foreground">
-              {item.caption ? (
-                <span className="mr-2 text-xs">{item.caption}</span>
-              ) : null}
-              <span className="font-medium text-foreground">
-                {format(item.value)}
+      {items.map((item, index) => {
+        const isTop =
+          highlightMax && items.length > 1 && item.value === top && top > 0;
+        return (
+          <li key={item.label} className="flex flex-col gap-1">
+            <div className="flex items-baseline justify-between gap-3 text-sm">
+              <span
+                className={cn("truncate", isTop && "font-medium")}
+                title={item.label}
+              >
+                {item.label}
               </span>
-            </span>
-          </div>
-          <div className="h-2 w-full bg-muted" aria-hidden>
-            <div
-              className="h-full bg-primary"
-              style={{
-                width: `${Math.min(100, (item.value / scale) * 100)}%`,
-              }}
-            />
-          </div>
-        </li>
-      ))}
+              <span className="shrink-0 tabular-nums text-muted-foreground">
+                {item.caption ? (
+                  <span className="mr-2 text-xs">{item.caption}</span>
+                ) : null}
+                <span className="font-medium text-foreground">
+                  {format(item.value)}
+                </span>
+              </span>
+            </div>
+            <div className="h-2 w-full bg-muted" aria-hidden>
+              <div
+                data-bar
+                className={cn(
+                  "h-full",
+                  isTop || !highlightMax ? "bg-primary" : "bg-primary/55",
+                )}
+                style={
+                  {
+                    width: `${Math.min(100, (item.value / scale) * 100)}%`,
+                    "--i": Math.min(index, 10),
+                  } as CSSProperties
+                }
+              />
+            </div>
+          </li>
+        );
+      })}
     </ul>
   );
 }

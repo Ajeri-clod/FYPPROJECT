@@ -78,6 +78,8 @@ export function AreaChart<T>({
           const color = s.color ?? chartColor(index);
           return (
             <Area
+              animationDuration={300}
+              animationEasing="ease-out"
               key={s.key}
               type="monotone"
               dataKey={s.key}

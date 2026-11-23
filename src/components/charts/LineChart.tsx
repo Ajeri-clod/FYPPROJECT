@@ -49,6 +49,8 @@ export function LineChart<T>({
           const color = s.color ?? chartColor(index);
           return (
             <Line
+              animationDuration={300}
+              animationEasing="ease-out"
               key={s.key}
               type="monotone"
               dataKey={s.key}

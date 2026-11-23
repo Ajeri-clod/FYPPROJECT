@@ -190,3 +190,295 @@
     @apply font-sans;
   }
 }
+
+/* ==========================================================================
+   Motion system — "Corporate" personality (clean, quick, tiny overshoot only
+   on feedback). One signature curve, three durations, one entrance pattern.
+   ========================================================================== */
+:root {
+  --ease-ui: cubic-bezier(0.2, 0, 0, 1); /* slow in, slow out — default */
+  --ease-in-ui: cubic-bezier(0.3, 0, 1, 1); /* exits */
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* follow-through overshoot */
+  --dur-press: 90ms; /* anticipation: quick squash */
+  --dur-quick: 150ms; /* hover, popups */
+  --dur-base: 220ms; /* release, settle, cards */
+  --dur-enter: 280ms; /* entrances (kept under 300ms) */
+}
+
+/* --- Buttons: squash on press, spring back on release ----------------------
+   The press transition is short and decelerating (anticipation); the release
+   uses the spring curve, so the button overshoots and settles (follow-through).
+   Transitions retarget mid-way, so letting go early reverses smoothly, and
+   dragging off a pressed button cancels the click (interruptible). */
+[data-slot="button"] {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform var(--dur-base) var(--ease-spring),
+    box-shadow var(--dur-base) var(--ease-ui),
+    background-color var(--dur-quick) var(--ease-ui),
+    color var(--dur-quick) var(--ease-ui),
+    border-color var(--dur-quick) var(--ease-ui),
+    opacity var(--dur-quick) var(--ease-ui);
+}
+[data-slot="button"]:active:not(:disabled):not([aria-haspopup]) {
+  transform: scale(1.03, 0.9); /* squash: wider and shorter on impact */
+  transition-duration: var(--dur-press);
+  transition-timing-function: var(--ease-ui);
+}
+/* Solid drawing: filled buttons get a lit top edge and a contact shadow,
+   which the press squeezes flat (secondary action). */
+[data-slot="button"].bg-primary {
+  box-shadow:
+    inset 0 1px 0 color-mix(in oklch, white 22%, transparent),
+    0 1px 2px color-mix(in oklch, var(--primary) 35%, transparent),
+    0 3px 8px -2px color-mix(in oklch, var(--primary) 30%, transparent);
+}
+[data-slot="button"].bg-primary:active:not(:disabled) {
+  box-shadow:
+    inset 0 1px 2px color-mix(in oklch, black 18%, transparent),
+    0 0 0 transparent;
+}
+
+/* Origin-aware ripple: grows from where the pointer went down (--px/--py are
+   set by the pointer listener in Providers). */
+[data-slot="button"]::after {
+  content: "";
+  position: absolute;
+  left: var(--px, 50%);
+  top: var(--py, 50%);
+  width: 220%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
+  transition:
+    transform 360ms var(--ease-ui),
+    opacity 360ms var(--ease-ui);
+  pointer-events: none;
+}
+[data-slot="button"]:active:not(:disabled)::after {
+  opacity: 0.14;
+  transform: translate(-50%, -50%) scale(1);
+  transition-duration: 0ms, var(--dur-press);
+}
+
+/* --- Popups grow out of their trigger (origin already = trigger), a touch
+   slower and decelerating so the growth is readable; exits are faster. */
+[data-slot="select-content"],
+[data-slot="dropdown-menu-content"],
+[data-slot="popover-content"] {
+  animation-duration: var(--dur-quick) !important;
+  animation-timing-function: var(--ease-ui) !important;
+}
+[data-slot="select-content"][data-closed],
+[data-slot="dropdown-menu-content"][data-closed],
+[data-slot="popover-content"][data-closed] {
+  animation-duration: 100ms !important;
+  animation-timing-function: var(--ease-in-ui) !important;
+}
+
+/* Dialogs grow from the point that was clicked (--last-x/--last-y, viewport
+   coordinates, set on pointerdown) instead of the screen centre. The dialog is
+   centred, so its left edge sits at 50vw - 50% of its own width. */
+[data-slot="dialog-content"] {
+  transform-origin: calc(var(--last-x, 50vw) - 50vw + 50%)
+    calc(var(--last-y, 50vh) - 50vh + 50%);
+  --tw-enter-scale: 0.6;
+  animation-duration: var(--dur-enter) !important;
+  animation-timing-function: var(--ease-ui) !important;
+}
+[data-slot="dialog-content"][data-closed] {
+  --tw-exit-scale: 0.9;
+  animation-duration: 150ms !important;
+  animation-timing-function: var(--ease-in-ui) !important;
+}
+
+/* --- Page entrance: staggered, on a slight arc ------------------------------
+   Applied only on the first visit to a page in a session (data-enter is set
+   by PageHeader), so frequently used screens stay instant. */
+@keyframes rise-arc {
+  0% {
+    opacity: 0;
+    transform: translate(-6px, 14px);
+  }
+  55% {
+    opacity: 1;
+    transform: translate(-1px, 3px);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+[data-enter] > *,
+[data-enter] > * > [data-slot="card"],
+[data-stagger] > * {
+  animation: rise-arc var(--dur-enter) var(--ease-ui) both;
+}
+[data-enter] > :nth-child(1) {
+  animation-delay: 0ms;
+}
+[data-enter] > :nth-child(2) {
+  animation-delay: 50ms;
+}
+[data-enter] > :nth-child(3) {
+  animation-delay: 100ms;
+}
+[data-enter] > :nth-child(4) {
+  animation-delay: 150ms;
+}
+[data-enter] > :nth-child(n + 5) {
+  animation-delay: 200ms;
+}
+/* Cards inside a row cascade a beat after their row (micro cascade, 40ms). */
+[data-enter] > * > [data-slot="card"]:nth-child(2),
+[data-stagger] > :nth-child(2) {
+  animation-delay: 40ms;
+}
+[data-enter] > * > [data-slot="card"]:nth-child(3),
+[data-stagger] > :nth-child(3) {
+  animation-delay: 80ms;
+}
+[data-enter] > * > [data-slot="card"]:nth-child(4),
+[data-stagger] > :nth-child(4) {
+  animation-delay: 120ms;
+}
+[data-stagger] > :nth-child(n + 5) {
+  animation-delay: 160ms;
+}
+[data-enter] > :nth-child(2) > [data-slot="card"]:nth-child(2) {
+  animation-delay: 90ms;
+}
+[data-enter] > :nth-child(2) > [data-slot="card"]:nth-child(3) {
+  animation-delay: 130ms;
+}
+[data-enter] > :nth-child(2) > [data-slot="card"]:nth-child(4) {
+  animation-delay: 170ms;
+}
+
+/* Ranked bars grow from the left one after another, overshoot slightly and
+   settle (follow-through). Later value changes glide (slow in, slow out). */
+@keyframes bar-grow {
+  0% {
+    transform: scaleX(0);
+  }
+  70% {
+    transform: scaleX(1.04);
+  }
+  100% {
+    transform: scaleX(1);
+  }
+}
+[data-bar] {
+  transform-origin: left center;
+  transition: width var(--dur-base) var(--ease-ui);
+}
+[data-enter] [data-bar],
+[data-stagger] [data-bar] {
+  animation: bar-grow 300ms var(--ease-ui) both;
+  animation-delay: calc(var(--i, 0) * 30ms + 120ms);
+}
+
+/* Peak moment: the best match lands with a small pop. */
+@keyframes peak-pop {
+  0% {
+    transform: scale(0.96);
+    box-shadow: 0 0 0 0 transparent;
+  }
+  60% {
+    transform: scale(1.015);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+[data-peak] {
+  animation: peak-pop 300ms var(--ease-spring) both;
+  animation-delay: 60ms;
+}
+
+/* End moment: success toasts pop their check icon; error toasts and form
+   errors give one firm shake (exaggerated feedback, no overshoot). */
+@keyframes icon-pop {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-8px);
+  }
+  40% {
+    transform: translateX(7px);
+  }
+  60% {
+    transform: translateX(-5px);
+  }
+  80% {
+    transform: translateX(3px);
+  }
+}
+[data-sonner-toast][data-type="success"] [data-icon] {
+  animation: icon-pop 300ms var(--ease-spring) 80ms both;
+}
+[data-sonner-toast][data-type="error"],
+[data-shake] {
+  animation: shake 300ms var(--ease-ui) both;
+}
+
+/* Doherty threshold: a thin progress bar if a page takes > 150ms to load. */
+@keyframes route-progress {
+  0% {
+    transform: scaleX(0);
+  }
+  60% {
+    transform: scaleX(0.7);
+  }
+  100% {
+    transform: scaleX(0.92);
+  }
+}
+[data-route-progress] {
+  transform-origin: left center;
+  animation: route-progress 1.6s var(--ease-ui) forwards;
+}
+
+/* --- Fitts's law: bigger targets where fingers are used ------------------- */
+@media (pointer: coarse) {
+  [data-slot="button"],
+  [data-slot="select-trigger"],
+  [data-sidebar="menu-button"] {
+    min-height: 44px;
+  }
+  [data-slot="button"][class*="size-"] {
+    min-width: 44px;
+  }
+}
+
+/* Accessibility: respect "reduce motion" — everything becomes instant. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+  }
+  [data-slot="button"]:active {
+    transform: none !important;
+  }
+}

@@ -98,6 +98,8 @@ export function BarChart<T>({
         {showLegend ? <Legend /> : null}
         {bars.map((s, index) => (
           <Bar
+            animationDuration={300}
+            animationEasing="ease-out"
             key={s.key}
             dataKey={s.key}
             name={s.label ?? s.key}

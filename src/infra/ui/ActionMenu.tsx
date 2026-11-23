@@ -86,7 +86,7 @@ export function ActionMenu({
     <DropdownMenu>
       <DropdownMenuTrigger
         render={
-          <Button variant="ghost" size="icon-sm" aria-label={ariaLabel}>
+          <Button variant="ghost" size="icon" aria-label={ariaLabel}>
             <DotsThreeVertical size={18} weight="bold" />
           </Button>
         }

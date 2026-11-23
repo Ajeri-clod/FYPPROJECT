@@ -159,7 +159,12 @@ function RecommendationsPage() {
           </CardContent>
         </Card>
 
-        <div className="flex flex-col gap-3 lg:col-span-2">
+        {/* Re-keyed per search so a new job-seeker's results cascade in. */}
+        <div
+          key={`${isCustom ? "custom" : candidate.id}-${nearby}`}
+          data-stagger
+          className="flex flex-col gap-3 lg:col-span-2"
+        >
           {ranked.length === 0 ? (
             <Card>
               <CardContent className="py-10 text-center text-sm text-muted-foreground">
@@ -173,12 +178,23 @@ function RecommendationsPage() {
               const gap = candidateSkillGap(profileSkills, job.skills);
               const score = Math.round(r.score * 100);
               return (
-                <Card key={job.id}>
+                <Card
+                  key={job.id}
+                  data-peak={index === 0 ? "" : undefined}
+                  className={
+                    index === 0 ? "shadow-md ring-2 ring-primary/70" : undefined
+                  }
+                >
                   <CardContent className="flex flex-col gap-3">
                     <div className="flex items-start justify-between gap-4">
                       <div>
-                        <p className="text-xs text-muted-foreground">
+                        <p className="flex items-center gap-2 text-xs text-muted-foreground">
                           #{index + 1}
+                          {index === 0 ? (
+                            <Badge className="bg-primary text-primary-foreground">
+                              Best match
+                            </Badge>
+                          ) : null}
                         </p>
                         <h3 className="font-medium">
                           {job.url ? (

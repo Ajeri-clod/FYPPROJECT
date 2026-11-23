@@ -3,10 +3,12 @@ import { AppSidebar } from "@/components/Sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { CommandMenuProvider } from "./CommandMenuProvider";
+import { RouteProgress } from "./RouteProgress";
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   return (
     <TooltipProvider delay={0}>
+      <RouteProgress />
       <SidebarProvider className="h-svh">
         <AppSidebar />
         <SidebarInset className="overflow-hidden">
