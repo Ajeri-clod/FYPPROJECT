@@ -27,6 +27,7 @@ import {
   candidateText,
   sampleCandidates,
 } from "@/features/matching/candidates";
+import { jobText } from "@/features/matching/evaluation";
 import {
   candidateSkillGap,
   skillGapTable,
@@ -71,7 +72,7 @@ function SkillGapPage() {
   const personal = useMemo(() => {
     const top = rankBySimilarity(
       candidateText(candidate),
-      open.map((job) => ({ id: job.id, text: job.skills, job })),
+      open.map((job) => ({ id: job.id, text: jobText(job), job })),
     ).slice(0, 3);
     const rows = top.map((r) => ({
       job: r.item.job,

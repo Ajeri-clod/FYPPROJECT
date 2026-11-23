@@ -2,6 +2,7 @@ import {
   BuildingsIcon,
   MapPinIcon,
   ShieldCheckIcon,
+  TargetIcon,
 } from "@phosphor-icons/react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
@@ -21,6 +22,7 @@ import { Label } from "@/components/ui/label";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
 import { Textarea } from "@/components/ui/textarea";
+import evaluation from "@/data/model-evaluation.json";
 import { allJobsQuery } from "@/features/jobs/queries";
 import { parseSkills } from "@/features/jobs/schema";
 import {
@@ -31,9 +33,10 @@ import {
   candidateText,
   sampleCandidates,
 } from "@/features/matching/candidates";
+import { jobText } from "@/features/matching/evaluation";
 import { candidateSkillGap } from "@/features/matching/skill-gap";
 import { rankBySimilarity } from "@/features/matching/tfidf";
-import { formatSalaryRange } from "@/lib/oku-format";
+import { formatPercent, formatSalaryRange } from "@/lib/oku-format";
 
 const searchSchema = z.object({
   candidate: z.string().optional().default(sampleCandidates[0].id),
@@ -72,7 +75,7 @@ function RecommendationsPage() {
       profileText,
       pool.map((job) => ({
         id: job.id,
-        text: `${job.skills}, ${job.title}, ${job.description ?? ""}`,
+        text: jobText(job),
         job,
       })),
     )
@@ -156,6 +159,36 @@ function RecommendationsPage() {
               Fair by design: only skills, education and experience are scored.
               Disability category, gender, ethnicity and age are never used.
             </p>
+
+            <div className="flex flex-col gap-2 border-t pt-3">
+              <p className="flex items-center gap-1.5 text-xs font-medium">
+                <TargetIcon size={14} />
+                Benchmark accuracy
+              </p>
+              <dl className="grid grid-cols-2 gap-x-3 gap-y-1 text-xs">
+                <dt className="text-muted-foreground">Top job suitable</dt>
+                <dd className="text-right font-medium tabular-nums">
+                  {formatPercent(evaluation.hitRateAt1 * 100, 0)}
+                </dd>
+                <dt className="text-muted-foreground">
+                  Precision@{evaluation.k}
+                </dt>
+                <dd className="text-right font-medium tabular-nums">
+                  {formatPercent(evaluation.precisionAtK * 100, 1)}
+                </dd>
+                <dt className="text-muted-foreground">Best possible</dt>
+                <dd className="text-right tabular-nums">
+                  {formatPercent(evaluation.bestPossiblePrecisionAtK * 100, 1)}
+                </dd>
+                <dt className="text-muted-foreground">Random picks</dt>
+                <dd className="text-right tabular-nums">
+                  {formatPercent(evaluation.randomPrecisionAtK * 100, 1)}
+                </dd>
+              </dl>
+              <p className="text-xs text-muted-foreground">
+                {evaluation.benchmark}, against occupation-family labels.
+              </p>
+            </div>
           </CardContent>
         </Card>
 

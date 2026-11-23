@@ -1,0 +1,13 @@
+{
+  "k": 5,
+  "benchmark": "30 sample Selangor job postings (27 open) × 16 sample job-seekers",
+  "evaluatedOn": "2026-11-23",
+  "precisionAtK": 0.4375000000000001,
+  "bestPossiblePrecisionAtK": 0.4875000000000001,
+  "rPrecisionAtK": 0.9197916666666667,
+  "hitRateAt1": 1,
+  "meanReciprocalRank": 1,
+  "randomPrecisionAtK": 0.0949074074074074,
+  "candidatesEvaluated": 16,
+  "candidatesSkipped": []
+}
